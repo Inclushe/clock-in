@@ -1,2 +1,99 @@
+mainColor = #F01127
+bgColor = #0
+
 body
-  background: green; // for good
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
+  background: bgColor
+  color: mainColor
+  font-family: 'Inter', sans-serif
+
+@supports (font-variation-settings: normal) {
+  body { font-family: 'Inter var', sans-serif }
+}
+
+#app
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
+  width: 100vw
+
+.container
+  display: grid
+  grid-template-rows: repeat(12, 3em)
+  grid-template-columns: repeat(24, 3em)
+  grid-gap: 1em 1.5em
+  gap: 1em 1.5em
+  font-size: 16px
+
+#clock
+  grid-row: 2 / 10
+  grid-column: 3 / 23
+  margin-left: -0.0825em
+  display: flex
+  justify-content: center
+  flex-direction: row
+  font-family: 'Graduate', sans-serif
+  font-size: 32em
+  text-align: center
+  font-variation-settings: "XOPQ" 150, "XTRA" 100, "OPSZ" 16, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
+  div 
+    flex-grow: 0
+    flex-shrink: 0
+    line-height: 1.17em
+    &.number
+      width: 0.6em
+    &.colon
+      width: 0.3em
+      text-align: right
+
+#border
+  grid-row: 1 / 10
+  grid-column: 1 / -1
+  svg
+    height: 100%
+    width: 100%
+
+#meridiem
+  grid-row: 8 / 10
+  grid-column: 23 / 25
+  display: flex
+  justify-content: center
+  align-items: center
+  font-weight: bold
+  color: bgColor
+  text-align: center
+  font-size: 3em
+  letter-spacing: 0.1em
+
+#button-row
+  grid-row: 11 / -1
+  grid-column: 1 / -1
+  display: flex
+  justify-content: space-between
+  .section-group
+    display: flex
+    align-items: center
+    svg
+      padding: 0 1.5em
+
+.button
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  box-sizing: border-box
+  height: 7em
+  width: 12em
+  margin-right: 1em
+  background: bgColor
+  font-weight: bold
+  text-transform: uppercase
+  border: 0.25em solid mainColor
+  border-radius: 1em
+  span
+    font-size: 1.5em
+    line-height: 1.5
