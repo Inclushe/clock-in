@@ -10,38 +10,32 @@ html(lang="en")
     title Document
   body
     #app
-      .container
-        #border
-          include public/images/border.svg
-        #meridiem PM
-        #clock
-          div.number 1
-          div.number 2
-          div.colon :
-          div.number 3
-          div.number 4
+      .container(:class='{"settings-active": settingsToggle}')
+        router-view
         #button-row
           .section-group
-            .button
+            router-link(to='/').button
               include public/images/Icon/Clock.svg
               span Clock
-            .button
+            router-link(to='/timer').button
               include public/images/Icon/Timer.svg
               span Timer
-            .button
+            router-link(to='/stopwatch').button
               include public/images/Icon/Stopwatch.svg
               span Stopwatch
-            .button
+            router-link(to='/alarm').button
               include public/images/Icon/Alarm.svg
               span Alarm
-            .button
+            router-link(to='/pomodoro').button
               include public/images/Icon/Pomodoro.svg
               span Pomodoro
-            .button
+            router-link(to='/interval').button
               include public/images/Icon/Interval.svg
               span Interval
           .section-group
-            include public/images/Icon/baseline-fullscreen-24px.svg
-            include public/images/Icon/twotone-settings-24px.svg
-          
+            a
+              include public/images/Icon/baseline-fullscreen-24px.svg
+            a(@click="toggleSettings")
+              include public/images/Icon/twotone-settings-24px.svg
+      settings    
     script(src="/public/scripts/index.js")
