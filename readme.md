@@ -40,6 +40,7 @@ npm run watch
   - [ ] Create pauseTimer function
   - [ ] Create resetTimer function
   - [ ] Add reset button (same style as stopwatch)
+  - [ ] Auto-add colons
   - [ ] Add animation
 - [ ] Stopwatch
 - [ ] Alarm
