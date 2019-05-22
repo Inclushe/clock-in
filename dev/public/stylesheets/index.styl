@@ -1,4 +1,6 @@
 mainColor = #F01127
+secondaryColor = darken(mainColor, 50%)
+tertiaryColor = lighten(mainColor, 90%)
 bgColor = #0
 
 body
@@ -38,6 +40,18 @@ body
     grid-gap: 1em 1.5em
     gap: 1em 1.5em
     font-size: 16px
+
+#header
+  grid-row: 2 / 4
+  grid-column: 4 / 22
+  display: flex
+  align-items: center
+  img
+    margin-right: 1em
+  h2
+    text-transform: uppercase
+    font-weight: bold
+    font-size: 3em
 
 #clock
   grid-row: 2 / 10
@@ -100,7 +114,7 @@ body
     svg
       padding: 0 1.5em
 
-.button
+a.button
   display: flex
   justify-content: center
   align-items: center
@@ -115,14 +129,49 @@ body
   text-transform: uppercase
   border: 0.25em solid mainColor
   border-radius: 1em
-  a
-    text-decoration: none
+  text-decoration: none
+  img
+    height: 3em
+    width: 3em
   span
     font-size: 1.5em
     line-height: 1.5
-  &.selected
+  &.router-link-exact-active
     background: mainColor
     color: bgColor
+
+#input
+  grid-row: 4 / -1
+  grid-column: 4 / 22
+  padding-right: 2em
+  background: secondaryColor
+  border-radius: 1rem
+  input
+    background: transparent
+    color: tertiaryColor
+    height: 100%
+    width: 100%
+    font-family: 'Graduate', sans-serif
+    font-size: 16em
+    text-align: right
+    font-variation-settings: "XOPQ" 150, "XTRA" 100, "OPSZ" 16, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
+    border: none
+
+#fab
+  grid-row: 5 / 7
+  grid-column: 23 / -1
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 7.5em
+  width: 7.5em
+  background: mainColor
+  border-radius: 50%
+  box-shadow: 0 0 2em 1.5em bgColor
+  img
+    height: 5.25em
+    width: 5.25em
+  
 
 .settings
   position: absolute

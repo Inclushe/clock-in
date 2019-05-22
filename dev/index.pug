@@ -15,27 +15,27 @@ html(lang="en")
         #button-row
           .section-group
             router-link(to='/').button
-              include public/images/Icon/Clock.svg
+              img(src='/public/images/Icon/Clock.svg' alt='Clock Icon')
               span Clock
             router-link(to='/timer').button
-              include public/images/Icon/Timer.svg
+              img(src='/public/images/Icon/Timer.svg' alt='Timer Icon')
               span Timer
             router-link(to='/stopwatch').button
-              include public/images/Icon/Stopwatch.svg
+              img(src='/public/images/Icon/Stopwatch.svg' alt='Stopwatch Icon')
               span Stopwatch
             router-link(to='/alarm').button
-              include public/images/Icon/Alarm.svg
+              img(src='/public/images/Icon/Alarm.svg' alt='Alarm Icon')
               span Alarm
             router-link(to='/pomodoro').button
-              include public/images/Icon/Pomodoro.svg
+              img(src='/public/images/Icon/Pomodoro.svg' alt='Pomodoro Icon')
               span Pomodoro
             router-link(to='/interval').button
-              include public/images/Icon/Interval.svg
+              img(src='/public/images/Icon/Interval.svg' alt='Interval Icon')
               span Interval
           .section-group
             a
-              include public/images/Icon/baseline-fullscreen-24px.svg
+              img(src='/public/images/Icon/baseline-fullscreen-24px.svg' alt='Fullscreen Icon')
             a(@click="toggleSettings")
-              include public/images/Icon/twotone-settings-24px.svg
+              img(src='/public/images/Icon/twotone-settings-24px.svg' alt='Settings Icon')
       settings    
     script(src="/public/scripts/index.js")
