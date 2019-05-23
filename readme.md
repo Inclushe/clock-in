@@ -43,6 +43,7 @@ npm run watch
   - [ ] Fix input box
     - [ ] Auto-add colons
   - [X] Add animation
+  - [ ] Change progress indicator pattern to svg
 - [ ] Stopwatch
 - [ ] Alarm
 - [ ] Pomodoro
