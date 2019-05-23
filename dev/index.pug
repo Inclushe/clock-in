@@ -12,7 +12,7 @@ html(lang="en")
   body
     #app
       .container(:class='{"settings-active": settingsToggle}')
-        transition(name="fade" mode="out-in")
+        transition(name="section" mode="out-in")
           router-view
         #button-row
           .section-group

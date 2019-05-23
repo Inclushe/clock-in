@@ -26,7 +26,7 @@ npm run watch
   - [X] Set up Vue Router
 - [ ] Clock
   - [X] Make the clock functional
-  - [ ] Add Tick Animation
+  - [X] Add Tick Animation
 - [ ] Settings
   - [X] Create Sliding Pane
   - [ ] Properly shrink viewport
@@ -40,8 +40,9 @@ npm run watch
   - [ ] Create pauseTimer function
   - [ ] Create resetTimer function
   - [ ] Add reset button (same style as stopwatch)
-  - [ ] Auto-add colons
-  - [ ] Add animation
+  - [ ] Fix input box
+    - [ ] Auto-add colons
+  - [X] Add animation
 - [ ] Stopwatch
 - [ ] Alarm
 - [ ] Pomodoro

@@ -16,6 +16,7 @@ export default new Vuex.Store({
       timeStamp: null,
       timeInterval: null,
       state: 'waiting',
+      startTimestamp: null,
       endTimestamp: null,
       differenceTimestamp: null
     }

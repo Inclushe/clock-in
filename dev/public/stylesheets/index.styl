@@ -32,12 +32,16 @@ body
     // justify-self: start
     transform: scale(0.5)
   .section-container
+    grid-row: 1 / 10
+    grid-column: 1 / -1
     display: grid
     grid-template-rows: repeat(9, 3em)
     grid-template-columns: repeat(24, 3em)
     grid-gap: 1em 1.5em
     gap: 1em 1.5em
     font-size: 16px
+    will-change: -webkit-transform
+    -webkit-transform: translateX(0)
 
 #header
   grid-row: 2 / 4
@@ -67,6 +71,7 @@ body
     flex-shrink: 0
     line-height: 1.17em
     will-change: -webkit-transform
+    -webkit-transform: translateX(0)
     &.number
       width: 0.6em
     &.colon
@@ -86,13 +91,20 @@ body
   font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
   div
     width: 0.625em
+    will-change: -webkit-transform
+    -webkit-transform: translateX(0)
 
-#border
+#border, #outlineBorder
   grid-row: 1 / 10
   grid-column: 1 / -1
+  transition: clip-path 1s linear
+  pointer-events: none
   svg
     height: 100%
     width: 100%
+
+#outlineBorder
+  z-index: -1
 
 #meridiem
   grid-row: 8 / 10
@@ -157,7 +169,7 @@ a.button
     font-family: 'Graduate', sans-serif
     font-size: 16em
     text-align: right
-    font-variation-settings: "XOPQ" 150, "XTRA" 100, "OPSZ" 16, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
+    font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
     border: none
 
 #fab
@@ -171,6 +183,7 @@ a.button
   background: mainColor
   border-radius: 50%
   box-shadow: 0 0 2em 1.5em bgColor
+  z-index: 1
   img
     height: 5.25em
     width: 5.25em
