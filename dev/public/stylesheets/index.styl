@@ -1,7 +1,5 @@
-mainColor = #F01127
-secondaryColor = darken(mainColor, 50%)
-tertiaryColor = lighten(mainColor, 90%)
-bgColor = #0
+@import 'transitions'
+@import 'variables'
 
 body
   margin: 0
@@ -68,6 +66,7 @@ body
     flex-grow: 0
     flex-shrink: 0
     line-height: 1.17em
+    will-change: -webkit-transform
     &.number
       width: 0.6em
     &.colon
@@ -77,12 +76,16 @@ body
 #seconds
   grid-row: 3 / 4
   grid-column: 23 / -1
+  display: flex
+  justify-content: center
   text-align: center
   color: bgColor
   font-family: 'Graduate', sans-serif
   font-size: 4em
   line-height: 1em
   font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
+  div
+    width: 0.625em
 
 #border
   grid-row: 1 / 10
@@ -144,7 +147,7 @@ a.button
   grid-row: 4 / -1
   grid-column: 4 / 22
   padding-right: 2em
-  background: secondaryColor
+  background-color: secondaryColor
   border-radius: 1rem
   input
     background: transparent

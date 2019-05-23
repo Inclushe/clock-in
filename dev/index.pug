@@ -2,7 +2,7 @@
 html(lang="en")
   head
     meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="viewport", content="width=device-width, initial-scale=0.2")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     link(rel="stylesheet" href="/public/stylesheets/reset.styl")
     link(rel="stylesheet" type="text/css" href="/public/fonts/graduate/font.css")
@@ -12,7 +12,8 @@ html(lang="en")
   body
     #app
       .container(:class='{"settings-active": settingsToggle}')
-        router-view
+        transition(name="fade" mode="out-in")
+          router-view
         #button-row
           .section-group
             router-link(to='/').button

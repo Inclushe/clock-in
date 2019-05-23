@@ -6,19 +6,24 @@
       img(src="../images/Icon/Timer.svg")
       h2 Timer
     #clock(v-if="timer.state === 'running'")
-      div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'") {{ timer.differenceTimestamp.format('mm')[0] }}
-      div.number {{ timer.differenceTimestamp.format('mm')[1] }}
+      transition(name="tick")
+        div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('mm')[1]") {{ timer.differenceTimestamp.format('mm')[1] }}
       div.colon :
-      div.number {{ timer.differenceTimestamp.format('ss')[0] }}
-      div.number {{ timer.differenceTimestamp.format('ss')[1] }}
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
     #clock(v-else-if="timer.state === 'done'")
       div.number 0
       div.number 0
       div.colon :
       div.number 0
       div.number 0
-    #input(v-else)
-      input(type="text" v-model="timerInput" autofocus)
+    transition(name="timer-fade-out")
+      #input(v-if="timer.state === 'waiting'")
+        input(type="text" v-model="timerInput" autofocus)
     #fab(@click="startTimer" v-if="timer.state === 'waiting'")
       img(src="../images/Icon/Play.svg")
     #fab(@click="unpauseTimer" v-else-if="timer.state === 'paused'")
@@ -60,6 +65,15 @@ export default {
       this.timer.timeInterval = setInterval(function () {
         self.$store.commit('updateTimerDifference')
       }, 100)
+    },
+    unpauseTimer () {
+      // @TODO:
+    },
+    pauseTimer () {
+      // @TODO:
+    },
+    resetTimer () {
+      // @TODO:
     }
   }
 }

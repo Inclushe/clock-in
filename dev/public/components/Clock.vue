@@ -4,12 +4,20 @@
       include ../images/border.svg
     #meridiem {{ currentTime.format('A') }}
     #clock
-      div.number(v-if="currentTime.format('hh')[0] !== '0'") {{ currentTime.format('hh')[0] }}
-      div.number {{ currentTime.format('hh')[1] }}
+      transition(name="tick")
+        div.number(v-if="currentTime.format('hh')[0] !== '0'" :key="currentTime.format('hh')[0]") {{ currentTime.format('hh')[0] }}
+      transition(name="tick")
+        div.number(:key="currentTime.format('hh')[1]") {{ currentTime.format('hh')[1] }}
       div.colon :
-      div.number {{ currentTime.format('mm')[0] }}
-      div.number {{ currentTime.format('mm')[1] }}
-    #seconds(v-show="settings.showSeconds") {{ currentTime.format('ss') }}
+      transition(name="tick" :key="currentTime.format('mm')[0]")
+        div.number(:key="currentTime.format('mm')[0]") {{ currentTime.format('mm')[0] }}
+      transition(name="tick" :key="currentTime.format('mm')[1]")
+        div.number(:key="currentTime.format('mm')[1]") {{ currentTime.format('mm')[1] }}
+    #seconds(v-show="settings.showSeconds")
+      transition(name="tick")
+        div(:key="currentTime.format('ss')[0]") {{ currentTime.format('ss')[0] }}
+      transition(name="tick")
+        div(:key="currentTime.format('ss')[1]") {{ currentTime.format('ss')[1] }}
 </template>
 
 <script>

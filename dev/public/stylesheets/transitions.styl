@@ -1,0 +1,21 @@
+.tick
+  &-enter-active
+    transition: -webkit-transform 1000ms cubic-bezier(0,1,0,1)
+  &-leave-active
+    display: none
+  &-enter
+    -webkit-transform: translateY(0.0625em)
+
+// change
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
