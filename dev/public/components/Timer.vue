@@ -5,7 +5,7 @@
     #outlineBorder
       include ../images/intersect.svg
     #header(v-if="timer.state === 'waiting'")
-      //- img(src="../images/Icon/Timer.svg")
+      img(src="../images/Icon/Timer.svg")
       h2 Timer
     #clock(v-if="timer.state === 'running' || timer.state === 'paused'")
       transition(name="tick")
