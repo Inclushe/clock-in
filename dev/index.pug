@@ -10,7 +10,7 @@ html(lang="en")
     link(rel="stylesheet" href="/public/stylesheets/index.styl")
     title Document
   body
-    #app
+    #app(:class="{'alert': alert}")
       .container(:class='{"settings-active": settingsToggle}')
         transition(name="section" mode="out-in")
           router-view

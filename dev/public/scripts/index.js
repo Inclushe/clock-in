@@ -44,7 +44,7 @@ var test = new Vue({
       self.$store.commit('updateCurrentTime')
     }, 100)
   },
-  computed: mapState(['settingsToggle']),
+  computed: mapState(['settingsToggle', 'alert']),
   methods: mapMutations(['toggleSettings']),
   components: { Settings }
 })

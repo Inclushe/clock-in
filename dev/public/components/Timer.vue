@@ -17,7 +17,7 @@
         div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
       transition(name="tick")
         div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
-    #clock(v-if="timer.state === 'done'")
+    #clock(v-if="timer.state === 'done'" :class="{'alert': alert}")
       div.number 0
       div.colon :
       div.number 0
@@ -48,15 +48,17 @@ export default {
     }
   },
   computed: {
-    ...mapState(['settings', 'timer']),
+    ...mapState(['settings', 'timer', 'alert']),
     percent () {
       if (this.timer.startTimestamp == null || this.timer.endTimestamp == null || this.timer.state === 'waiting') {
         return 1
       } else if (this.timer.state === 'done') {
         return 0
       } else {
-        // console.log(this.timer.differenceTimestamp.valueOf() - 1, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
-        return (this.timer.differenceTimestamp.unix() - 1) / (this.timer.endTimestamp.unix() - this.timer.startTimestamp.unix())
+        console.log('per')
+        console.log(this.timer.differenceTimestamp.valueOf() - 1000, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
+        console.log('perend')
+        return ((this.timer.differenceTimestamp.valueOf() - 1000) / (this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf()))
       }
     }
   },

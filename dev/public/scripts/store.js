@@ -9,6 +9,7 @@ export default new Vuex.Store({
     currentTime: dayjs(),
     clockInterval: null,
     settingsToggle: false,
+    alert: false,
     settings: {
       showSeconds: true
     },
@@ -32,6 +33,7 @@ export default new Vuex.Store({
       if (differenceTimestamp.valueOf() <= 1000) {
         clearInterval(state.timer.timeInterval)
         state.timer.state = 'done'
+        state.alert = true
       } else {
         state.timer.differenceTimestamp = differenceTimestamp
         state.timer.state = 'running'
@@ -57,6 +59,7 @@ export default new Vuex.Store({
     resetTimer (state) {
       clearInterval(state.timer.timeInterval)
       state.timer.state = 'waiting'
+      state.alert = false
     },
     updateSettings (state, settings) {
       state.settings = settings
