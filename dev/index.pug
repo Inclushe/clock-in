@@ -17,22 +17,28 @@ html(lang="en")
         #button-row
           .section-group
             router-link(to='/').button
-              img(src='/public/images/Icon/Clock.svg' alt='Clock Icon')
+              img.icon(src='/public/images/Icon/Clock.svg' alt='Clock Icon')
+              img.icon--selected(src='/public/images/Icon/ClockSelected.svg' alt='Clock Icon')
               span Clock
             router-link(to='/timer').button
-              img(src='/public/images/Icon/Timer.svg' alt='Timer Icon')
+              img.icon(src='/public/images/Icon/Timer.svg' alt='Timer Icon')
+              img.icon--selected(src='/public/images/Icon/TimerSelected.svg' alt='Timer Icon')
               span Timer
             router-link(to='/stopwatch').button
-              img(src='/public/images/Icon/Stopwatch.svg' alt='Stopwatch Icon')
+              img.icon(src='/public/images/Icon/Stopwatch.svg' alt='Stopwatch Icon')
+              img.icon--selected(src='/public/images/Icon/StopwatchSelected.svg' alt='Stopwatch Icon')
               span Stopwatch
             router-link(to='/alarm').button
-              img(src='/public/images/Icon/Alarm.svg' alt='Alarm Icon')
+              img.icon(src='/public/images/Icon/Alarm.svg' alt='Alarm Icon')
+              img.icon--selected(src='/public/images/Icon/AlarmSelected.svg' alt='Alarm Icon')
               span Alarm
             router-link(to='/pomodoro').button
-              img(src='/public/images/Icon/Pomodoro.svg' alt='Pomodoro Icon')
+              img.icon(src='/public/images/Icon/Pomodoro.svg' alt='Pomodoro Icon')
+              img.icon--selected(src='/public/images/Icon/PomodoroSelected.svg' alt='Pomodoro Icon')
               span Pomodoro
             router-link(to='/interval').button
-              img(src='/public/images/Icon/Interval.svg' alt='Interval Icon')
+              img.icon(src='/public/images/Icon/Interval.svg' alt='Interval Icon')
+              img.icon--selected(src='/public/images/Icon/IntervalSelected.svg' alt='Interval Icon')
               span Interval
           .section-group
             a

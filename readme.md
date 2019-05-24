@@ -20,8 +20,8 @@ npm run watch
 
 - [ ] General Layout
   - [X] Recreate Figma Design (with seconds and main buttons)
-  - [ ] Create Timer Progress Bar
-  - [ ] Create Entrance/Exit Animation
+  - [X] Create Timer Progress Bar
+  - [X] Create Entrance/Exit Animation
   - [ ] Create Animation Story?
   - [X] Set up Vue Router
 - [ ] Clock
@@ -36,14 +36,15 @@ npm run watch
 - [ ] Timer
   - [X] Create Input Type
   - [X] Parse Input
-  - [ ] Create unpauseTimer function
-  - [ ] Create pauseTimer function
-  - [ ] Create resetTimer function
+  - [X] Create unpauseTimer function
+  - [X] Create pauseTimer function
+  - [X] Create resetTimer function
   - [ ] Add reset button (same style as stopwatch)
-  - [ ] Fix input box
+  - [ ] Fix progress bar (stop when pausing)
+  - [ ] Fix input box (Android Clock App)
     - [ ] Auto-add colons
   - [X] Add animation
-  - [ ] Change progress indicator pattern to svg
+  - [X] Change progress indicator pattern to svg
 - [ ] Stopwatch
 - [ ] Alarm
 - [ ] Pomodoro

@@ -5,41 +5,39 @@
     #outlineBorder
       include ../images/intersect.svg
     #header(v-if="timer.state === 'waiting'")
-      img(src="../images/Icon/Timer.svg")
+      //- img(src="../images/Icon/Timer.svg")
       h2 Timer
-    transition(name="bolden")
-      #clock(v-if="timer.state === 'running'")
-        transition(name="tick")
-          div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
-        transition(name="tick")
-          div.number(:key="timer.differenceTimestamp.format('mm')[1]") {{ timer.differenceTimestamp.format('mm')[1] }}
-        div.colon :
-        transition(name="tick")
-          div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
-        transition(name="tick")
-          div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
+    #clock(v-if="timer.state === 'running' || timer.state === 'paused'")
+      transition(name="tick")
+        div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('mm')[1]") {{ timer.differenceTimestamp.format('mm')[1] }}
+      div.colon :
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
+      transition(name="tick")
+        div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
     #clock(v-if="timer.state === 'done'")
       div.number 0
       div.colon :
       div.number 0
       div.number 0
-    transition(name="timer-fade-out")
-      #input(v-if="timer.state === 'waiting'")
-        input(type="text" v-model="timerInput" autofocus)
+    #input(v-if="timer.state === 'waiting'")
+      input(type="text" v-model="timerInput" autofocus)
     #fab(@click="startTimer" v-if="timer.state === 'waiting'")
-      img(src="../images/Icon/Play.svg")
+      img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpauseTimer" v-else-if="timer.state === 'paused'")
-      img(src="../images/Icon/Play.svg")
+      img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="pauseTimer" v-else-if="timer.state === 'running'")
-      img(src="../images/Icon/Pause.svg")
+      img(src="../images/Icon/Pause.svg" alt="Pause Icon")
     #fab(@click="resetTimer" v-else-if="timer.state === 'done'")
-      img(src="../images/Icon/Stop.svg")
+      img(src="../images/Icon/Stop.svg" alt="Stop Icon")
 </template>
 
 <script>
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 dayjs.extend(utc)
 
@@ -57,7 +55,7 @@ export default {
       } else if (this.timer.state === 'done') {
         return 0
       } else {
-        console.log(this.timer.differenceTimestamp.unix() - 1, this.timer.endTimestamp.unix() - this.timer.startTimestamp.unix())
+        // console.log(this.timer.differenceTimestamp.valueOf() - 1, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
         return (this.timer.differenceTimestamp.unix() - 1) / (this.timer.endTimestamp.unix() - this.timer.startTimestamp.unix())
       }
     }
@@ -74,19 +72,16 @@ export default {
         calculatedTime = calculatedTime.add(value, units[index])
       })
       this.timer.endTimestamp = calculatedTime
-      let self = this
-      this.timer.timeInterval = setInterval(function () {
-        self.$store.commit('updateTimerDifference')
-      }, 100)
+      this.$store.dispatch('intervalFn')
     },
     unpauseTimer () {
-      // @TODO:
+      this.$store.commit('unpauseTimer')
     },
     pauseTimer () {
-      // @TODO:
+      this.$store.commit('pauseTimer')
     },
     resetTimer () {
-      // @TODO:
+      this.$store.commit('resetTimer')
     }
   }
 }
