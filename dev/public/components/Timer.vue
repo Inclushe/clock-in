@@ -22,8 +22,8 @@
       div.colon :
       div.number 0
       div.number 0
-    #input(v-if="timer.state === 'waiting'")
-      input(type="text" v-model="timerInput" autofocus)
+    .input(v-if="timer.state === 'waiting'" @keydown.enter="startTimer")
+      input#input(type="text" v-model="timerInput")
     #fab(@click="startTimer" v-if="timer.state === 'waiting'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpauseTimer" v-else-if="timer.state === 'paused'")
@@ -64,17 +64,19 @@ export default {
   },
   methods: {
     startTimer () {
-      // Add one second to the current time so that the timer starts at the input
-      let calculatedTime = dayjs().utc().add(1, 's')
-      this.timer.startTimestamp = calculatedTime
-      // Parse end time from input
-      let timerArray = this.timerInput.split(':').reverse().slice(0, 3)
-      let units = 'smh'
-      timerArray.forEach((value, index) => {
-        calculatedTime = calculatedTime.add(value, units[index])
-      })
-      this.timer.endTimestamp = calculatedTime
-      this.$store.dispatch('intervalFn')
+      if (this.timer.state == 'waiting') {
+        // Add one second to the current time so that the timer starts at the input
+        let calculatedTime = dayjs().utc().add(1, 's')
+        this.timer.startTimestamp = calculatedTime
+        // Parse end time from input
+        let timerArray = this.timerInput.split(':').reverse().slice(0, 3)
+        let units = 'smh'
+        timerArray.forEach((value, index) => {
+          calculatedTime = calculatedTime.add(value, units[index])
+        })
+        this.timer.endTimestamp = calculatedTime
+        this.$store.dispatch('timerIntervalFn')
+      }
     },
     unpauseTimer () {
       this.$store.commit('unpauseTimer')
@@ -85,6 +87,10 @@ export default {
     resetTimer () {
       this.$store.commit('resetTimer')
     }
+  },
+  mounted () {
+    console.log('timer')
+    this.$el.querySelector('input#input').focus()
   }
 }
 </script>

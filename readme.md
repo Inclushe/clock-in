@@ -43,6 +43,7 @@ npm run watch
   - [ ] Fix progress bar (stop when pausing)
   - [ ] Fix input box (Android Clock App)
     - [ ] Auto-add colons
+    - [ ] Valid input
   - [X] Add animation
   - [X] Change progress indicator pattern to svg
 - [ ] Stopwatch

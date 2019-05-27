@@ -25,8 +25,9 @@ export default new Vuex.Store({
       state: 'waiting',
       stopwatchInterval: null,
       startTimestamp: null,
+      timeSinceStart: null,
       pausedTimestamp: null,
-      lapTimestamps: null
+      lapTimestamps: []
     }
   },
   mutations: {
@@ -60,12 +61,32 @@ export default new Vuex.Store({
       state.timer.startTimestamp = dayjs(state.timer.startTimestamp.valueOf() + difference).utc()
       state.timer.endTimestamp = dayjs(state.timer.endTimestamp.valueOf() + difference).utc()
       state.timer.state = 'running'
-      this.dispatch('intervalFn')
+      this.dispatch('timerIntervalFn')
+    },
+    pauseStopwatch (state) {
+      clearInterval(state.stopwatch.stopwatchInterval)
+      state.stopwatch.pausedTimestamp = dayjs().utc()
+      state.stopwatch.state = 'paused'
+    },
+    unpauseStopwatch (state) {
+      console.log('test')
+      let currentTime = dayjs()
+      let difference = currentTime.valueOf() - state.stopwatch.pausedTimestamp.valueOf()
+      state.stopwatch.startTimestamp = dayjs(state.stopwatch.startTimestamp.valueOf() + difference).utc()
+      this.dispatch('stopwatchIntervalFn')
+    },
+    lap (state) {
+      state.stopwatch.lapTimestamps.push(state.stopwatch.timeSinceStart)
     },
     resetTimer (state) {
       clearInterval(state.timer.timeInterval)
       state.timer.state = 'waiting'
       state.alert = false
+    },
+    resetStopwatch (state) {
+      clearInterval(state.stopwatch.timeInterval)
+      state.stopwatch.lapTimestamps = []
+      state.stopwatch.state = 'waiting'
     },
     updateSettings (state, settings) {
       state.settings = settings
@@ -73,18 +94,27 @@ export default new Vuex.Store({
     updateTimer (state, timer) {
       state.timer = timer
     },
+    toggleSettings (state) {
+      state.settingsToggle = !state.settingsToggle
+    },
     updateTimerIntervalFn (state, fn) {
       state.timer.timeInterval = fn
     },
-    toggleSettings (state) {
-      state.settingsToggle = !state.settingsToggle
+    updateStopwatchIntervalFn (state) {
+      state.stopwatch.stopwatchInterval = setInterval(function () {
+        state.stopwatch.timeSinceStart = dayjs(dayjs().diff(state.stopwatch.startTimestamp)).utc()
+        state.stopwatch.state = 'running'
+      }, 10)
     }
   },
   actions: {
-    intervalFn (context) {
+    timerIntervalFn (context) {
       context.commit('updateTimerIntervalFn', setInterval(function () {
         context.commit('updateTimerDifference')
       }, 100))
+    },
+    stopwatchIntervalFn (context) {
+      context.commit('updateStopwatchIntervalFn')
     }
   }
 })
