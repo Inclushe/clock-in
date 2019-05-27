@@ -14,13 +14,19 @@ export default new Vuex.Store({
       showSeconds: true
     },
     timer: {
-      timeStamp: null,
-      timeInterval: null,
       state: 'waiting',
+      timeInterval: null,
       startTimestamp: null,
       endTimestamp: null,
       differenceTimestamp: null,
       pausedTimestamp: null
+    },
+    stopwatch: {
+      state: 'waiting',
+      stopwatchInterval: null,
+      startTimestamp: null,
+      pausedTimestamp: null,
+      lapTimestamps: null
     }
   },
   mutations: {
