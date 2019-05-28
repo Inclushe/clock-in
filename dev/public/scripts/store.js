@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import dayjs from 'dayjs'
+import timer from './modules/timer'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  modules: {
+    timer
+  },
   state: {
     currentTime: dayjs(),
     clockInterval: null,
@@ -12,14 +16,6 @@ export default new Vuex.Store({
     alert: false,
     settings: {
       showSeconds: true
-    },
-    timer: {
-      state: 'waiting',
-      timeInterval: null,
-      startTimestamp: null,
-      endTimestamp: null,
-      differenceTimestamp: null,
-      pausedTimestamp: null
     },
     stopwatch: {
       state: 'waiting',
@@ -34,35 +30,6 @@ export default new Vuex.Store({
     updateCurrentTime (state) {
       state.currentTime = dayjs()
     },
-    updateTimerDifference (state) {
-      let differenceTimestamp = dayjs(state.timer.endTimestamp.diff(dayjs().utc())).utc()
-      console.log(differenceTimestamp.valueOf())
-      if (differenceTimestamp.valueOf() <= 1000) {
-        clearInterval(state.timer.timeInterval)
-        state.timer.state = 'done'
-        state.alert = true
-      } else {
-        state.timer.differenceTimestamp = differenceTimestamp
-        state.timer.state = 'running'
-      }
-    },
-    pauseTimer (state) {
-      clearInterval(state.timer.timeInterval)
-      state.timer.pausedTimestamp = dayjs().utc()
-      state.timer.state = 'paused'
-    },
-    unpauseTimer (state) {
-      // console.log(state.timer.differenceTimestamp)
-      let currentTime = dayjs()
-      let difference = currentTime.valueOf() - state.timer.pausedTimestamp.valueOf()
-      console.log(difference)
-      console.log(state.timer.startTimestamp.valueOf())
-      console.log(state.timer.endTimestamp.valueOf())
-      state.timer.startTimestamp = dayjs(state.timer.startTimestamp.valueOf() + difference).utc()
-      state.timer.endTimestamp = dayjs(state.timer.endTimestamp.valueOf() + difference).utc()
-      state.timer.state = 'running'
-      this.dispatch('timerIntervalFn')
-    },
     pauseStopwatch (state) {
       clearInterval(state.stopwatch.stopwatchInterval)
       state.stopwatch.pausedTimestamp = dayjs().utc()
@@ -76,29 +43,31 @@ export default new Vuex.Store({
       this.dispatch('stopwatchIntervalFn')
     },
     lap (state) {
-      state.stopwatch.lapTimestamps.push(state.stopwatch.timeSinceStart)
-    },
-    resetTimer (state) {
-      clearInterval(state.timer.timeInterval)
-      state.timer.state = 'waiting'
-      state.alert = false
+      let currentTime = state.stopwatch.timeSinceStart
+      let hours = (((currentTime.date() - 1) * 24) + currentTime.hour()).toString()
+      let hoursString = hours.length === 1 ? (0 + hours) : hours
+      state.stopwatch.lapTimestamps.push(hoursString + currentTime.format(':mm:ss.SSS'))
     },
     resetStopwatch (state) {
-      clearInterval(state.stopwatch.timeInterval)
-      state.stopwatch.lapTimestamps = []
+      console.log()
+      clearInterval(state.stopwatch.stopwatchInterval)
       state.stopwatch.state = 'waiting'
+      state.stopwatch.lapTimestamps = []
     },
-    updateSettings (state, settings) {
-      state.settings = settings
-    },
-    updateTimer (state, timer) {
-      state.timer = timer
-    },
+    // updateSettings (state, settings) {
+    //   state.settings = settings
+    // },
+    // updateTimer (state, timer) {
+    //   state.timer = timer
+    // },
     toggleSettings (state) {
       state.settingsToggle = !state.settingsToggle
     },
-    updateTimerIntervalFn (state, fn) {
-      state.timer.timeInterval = fn
+    enableAlert (state) {
+      state.alert = true
+    },
+    disableAlert (state) {
+      state.alert = false
     },
     updateStopwatchIntervalFn (state) {
       state.stopwatch.stopwatchInterval = setInterval(function () {
@@ -108,11 +77,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    timerIntervalFn (context) {
-      context.commit('updateTimerIntervalFn', setInterval(function () {
-        context.commit('updateTimerDifference')
-      }, 100))
-    },
     stopwatchIntervalFn (context) {
       context.commit('updateStopwatchIntervalFn')
     }

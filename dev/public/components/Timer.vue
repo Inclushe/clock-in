@@ -7,7 +7,7 @@
     #header(v-if="timer.state === 'waiting'")
       img(src="../images/Icon/Timer.svg")
       h2 Timer
-    #clock(v-if="timer.state === 'running' || timer.state === 'paused'")
+    #clock(v-if="timer.state === 'running' || timer.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
       transition(name="tick")
@@ -17,13 +17,16 @@
         div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
       transition(name="tick")
         div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
-    #clock(v-if="timer.state === 'done'" :class="{'alert': alert}")
+    #clock(v-if="timer.state === 'done'" :class="{'alert': alert}").time-style
       div.number 0
       div.colon :
       div.number 0
       div.number 0
     .input(v-if="timer.state === 'waiting'" @keydown.enter="startTimer")
       input#input(type="text" v-model="timerInput")
+    .time-button-section.time-button-section--short
+      .time-button(@click="resetTimer" v-if="timer.state !== 'waiting'")
+        span Reset
     #fab(@click="startTimer" v-if="timer.state === 'waiting'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpauseTimer" v-else-if="timer.state === 'paused'")
@@ -37,7 +40,7 @@
 <script>
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 dayjs.extend(utc)
 
@@ -75,22 +78,17 @@ export default {
           calculatedTime = calculatedTime.add(value, units[index])
         })
         this.timer.endTimestamp = calculatedTime
-        this.$store.dispatch('timerIntervalFn')
+        this.$store.dispatch('timer/timerIntervalFn')
       }
     },
-    unpauseTimer () {
-      this.$store.commit('unpauseTimer')
-    },
-    pauseTimer () {
-      this.$store.commit('pauseTimer')
-    },
-    resetTimer () {
-      this.$store.commit('resetTimer')
-    }
+    ...mapMutations({pauseTimer: 'timer/pauseTimer'}),
+    ...mapActions({resetTimer: 'timer/resetTimer', unpauseTimer: 'timer/unpauseTimer'})
   },
   mounted () {
     console.log('timer')
-    this.$el.querySelector('input#input').focus()
+    if (this.timer.state === 'waiting') {
+      this.$el.querySelector('input#input').focus()
+    }
   }
 }
 </script>

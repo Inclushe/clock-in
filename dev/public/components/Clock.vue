@@ -3,7 +3,7 @@
     #border
       include ../images/border.svg
     #meridiem {{ currentTime.format('A') }}
-    #clock
+    #clock.time-style
       transition(name="tick")
         div.number(v-if="currentTime.format('hh')[0] !== '0'" :key="currentTime.format('hh')[0]") {{ currentTime.format('hh')[0] }}
       transition(name="tick")

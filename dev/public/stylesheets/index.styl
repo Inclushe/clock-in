@@ -1,5 +1,5 @@
-@import 'transitions'
-@import 'variables'
+@import '_transitions'
+@import '_variables'
 
 body
   margin: 0
@@ -63,9 +63,7 @@ body
     font-weight: bold
     font-size: 3em
 
-#clock
-  grid-row: 2 / 10
-  grid-column: 3 / 23
+.time-style
   display: flex
   justify-content: center
   flex-direction: row
@@ -77,8 +75,6 @@ body
   div 
     flex-grow: 0
     flex-shrink: 0
-    line-height: 1.17em
-    font-size: 32em
     text-shadow: 0 0em 0.125em secondaryColor;
     will-change: -webkit-transform
     -webkit-transform: translateX(0)
@@ -87,6 +83,58 @@ body
       width: 0.65em
     &.colon
       width: 0.25em
+
+#clock
+  grid-row: 2 / 10
+  grid-column: 3 / 23
+  div
+    font-size: 32em
+    line-height: 1.17em
+  
+#stopwatchTime
+  grid-row: 5 / 8
+  grid-column: 4 / 15
+  div
+    font-size: 11.5em
+    line-height: 1em
+
+#milliseconds
+  grid-row: 8 / 10
+  grid-column: 13 / 15
+  justify-content: flex-end
+  div
+    font-size: 4em
+    line-height: 1em
+
+.lap-section
+  grid-row: 3 / -1
+  grid-column: 16 / 22
+  overflow-y: scroll
+  &_header
+    background: mainColor
+    color: bgColor
+    height: 3em
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 1em 1em 0 0
+    h2
+      font-size: 2em
+  table
+    margin-top: 1em
+    tr
+      height: 3em
+      text-align: right
+    td#lapNumber
+      font-weight: bold
+      font-size: 2em
+      vertical-align: baseline
+      width: 1.5em
+    td#lapTime
+      margin-left: 1em
+      font-size: 2em
+
 @keyframes alert-text
   0%
     color: mainColor
@@ -170,6 +218,7 @@ a.button
   span
     font-size: 1.5em
     line-height: 1.5
+    letter-spacing: 0.05em
   &.router-link-exact-active
     background: mainColor
     color: bgColor
@@ -179,18 +228,36 @@ a.button
         &--selected
           display: block
 
+.time-button-section
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  flex-direction: column
+  grid-row: 6 / 10
+  grid-column: 23 / -1
+  z-index: 2
+  &--short
+    grid-row: 8 / 10
+
 .time-button
   margin: 0.5em
+  margin-top: 0em
+  height: 6em
+  width: 6em
   border: 0.25em solid bgColor
   border-radius: 1em
+  background: bgColor
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
   span
-    color: bgColor
-  &.lap
-    grid-row: 6 / 8
-    grid-column: 23 / -1
-  &.reset
-    grid-row: 8 / 10
-    grid-column: 23 / -1
+    text-transform: uppercase
+    user-select: none
+    color: mainColor
+    font-size: 1.5em
+    font-weight: bold
+    letter-spacing: 0.05em
 
 .input
   grid-row: 4 / -1
