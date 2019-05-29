@@ -58,9 +58,9 @@ export default {
       } else if (this.timer.state === 'done') {
         return 0
       } else {
-        console.log('per')
-        console.log(this.timer.differenceTimestamp.valueOf() - 1000, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
-        console.log('perend')
+        // console.log('per')
+        // console.log(this.timer.differenceTimestamp.valueOf() - 1000, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
+        // console.log('perend')
         return ((this.timer.differenceTimestamp.valueOf() - 1000) / (this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf()))
       }
     }

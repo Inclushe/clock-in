@@ -1,0 +1,66 @@
+@import '_variables'
+
+a.button
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  box-sizing: border-box
+  height: 7em
+  width: 12em
+  margin-right: 1em
+  background: bgColor
+  color: mainColor
+  font-weight: bold
+  text-transform: uppercase
+  border: 0.25em solid mainColor
+  border-radius: 1em
+  text-decoration: none
+  img
+    height: 3em
+    width: 3em
+    &.icon--selected
+      display: none
+  span
+    font-size: 1.5em
+    line-height: 1.5
+    letter-spacing: 0.05em
+  &.router-link-exact-active
+    background: mainColor
+    color: bgColor
+    img
+      &.icon
+        display: none
+        &--selected
+          display: block
+
+.time-button-section
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  flex-direction: column
+  grid-row: 6 / 10
+  grid-column: 23 / -1
+  z-index: 2
+  &--short
+    grid-row: 8 / 10
+
+.time-button
+  margin: 0.5em
+  margin-top: 0em
+  height: 6em
+  width: 6em
+  border: 0.25em solid bgColor
+  border-radius: 1em
+  background: bgColor
+  display: flex
+  justify-content: center
+  align-items: center
+  cursor: pointer
+  span
+    text-transform: uppercase
+    user-select: none
+    color: mainColor
+    font-size: 1.5em
+    font-weight: bold
+    letter-spacing: 0.05em

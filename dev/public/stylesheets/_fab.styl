@@ -1,0 +1,30 @@
+@import '_variables'
+
+#fab
+  grid-row: 5 / 7
+  grid-column: 23 / -1
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 7.5em
+  width: 7.5em
+  background: mainColor
+  border-radius: 50%
+  box-shadow: 0 0 2em 1.5em bgColor
+  z-index: 1
+  transition: all 50ms ease-in-out
+  cursor: pointer
+  &.up
+    grid-row: 3 / 5
+    grid-column: 23 / -1
+  &:hover
+    transform: scale(1.1)
+    background: lighten(mainColor, 25%)
+  &:active
+    transform: scale(0.9)
+    box-shadow: 0 0 0 1.5em bgColor
+    background: mainColor
+  img
+    height: 5.25em
+    width: 5.25em
+  

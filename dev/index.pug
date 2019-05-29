@@ -11,6 +11,9 @@ html(lang="en")
     title Document
   body
     #app(:class="{'alert': alert}")
+      audio#alert(v-if="alert")
+        source(src="/public/audio/alert_simple.ogg" type="audio/ogg")
+        source(src="/public/audio/alert_simple.mp3" type="audio/mpeg")
       .container(:class='{"settings-active": settingsToggle}')
         transition(name="section" mode="out-in")
           router-view

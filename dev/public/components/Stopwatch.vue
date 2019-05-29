@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import dayjs from 'dayjs'
 
 export default {
@@ -72,10 +72,16 @@ export default {
   methods: {
     startStopwatch () {
       this.stopwatch.startTimestamp = dayjs().utc()
-      this.$store.dispatch('stopwatchIntervalFn')
-      // this.stopwatch.state = 'running'
+      this.$store.dispatch('stopwatch/stopwatchIntervalFn')
     },
-    ...mapMutations(['unpauseStopwatch', 'pauseStopwatch', 'resetStopwatch', 'lap'])
+    ...mapMutations({
+      pauseStopwatch: 'stopwatch/pauseStopwatch',
+      resetStopwatch: 'stopwatch/resetStopwatch',
+      lap: 'stopwatch/lap'
+    }),
+    ...mapActions({
+      unpauseStopwatch: 'stopwatch/unpauseStopwatch'
+    })
   }
 }
 </script>
