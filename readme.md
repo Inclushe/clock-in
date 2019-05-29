@@ -24,6 +24,7 @@ npm run watch
   - [X] Create Entrance/Exit Animation
   - [X] Set up Vue Router
   - [ ] Scale layout to width
+  - [ ] Change secondary and tertiary colors
 - [ ] Clock
   - [X] Make the clock functional
   - [X] Add Tick Animation
@@ -40,6 +41,7 @@ npm run watch
     - [ ] Valid input
     - [ ] Handle invalid input
   - [ ] Fix hour display
+  - [ ] Add notice for autoplaying disabled or find out how to "bypass" (intent)
   - [X] Add animation
   - [X] Change progress indicator pattern to svg
 - [ ] Stopwatch
