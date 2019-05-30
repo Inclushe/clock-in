@@ -1,16 +1,6 @@
 @import '_variables'
 
-div div.number.tick
-  &-enter-active
-    transition: -webkit-transform 1000ms cubic-bezier(0,1,0,1), opacity 0s, font-variation-settings 1000ms cubic-bezier(0,1,0,1)
-  &-leave-active
-    position: absolute
-    opacity: 0
-  &-enter
-    font-variation-settings: "XOPQ" 150, "XTRA" 100, "OPSZ" 16, "GRAD" 12, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
-    -webkit-transform: translateY(0.0625em)
-
-#seconds div.tick
+div div.number.tick, #seconds div.tick
   &-enter-active
     transition: -webkit-transform 1000ms cubic-bezier(0,1,0,1), opacity 0s
   &-leave-active
