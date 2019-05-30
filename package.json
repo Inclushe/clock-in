@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "parcel ./dev/index.pug  --port 8080",
-    "build": "parcel build ./dev/index.pug -d ./dist/ && cp ./dev/CNAME ./dist/CNAME",
+    "build": "rm -r dist/ && parcel build ./dev/index.pug -d ./dist/ --no-minify && cp ./dev/CNAME ./dist/CNAME",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Inclushe",
@@ -22,6 +22,7 @@
     "@vue/component-compiler-utils": "^2.6.0",
     "cssnano": "^4.1.10",
     "dayjs": "^1.8.14",
+    "fscreen": "^1.0.2",
     "parcel": "^1.12.3",
     "pug": "^2.0.3",
     "sass": "^1.17.4",

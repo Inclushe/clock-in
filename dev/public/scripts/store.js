@@ -32,6 +32,8 @@ export default new Vuex.Store({
     },
     enableAlert (state) {
       state.alert = true
+      state.alertAudio.currentTime = 0
+      state.alertAudio.play()
       state.alertInterval = setInterval(function () {
         state.alertAudio.currentTime = 0
         state.alertAudio.play()
@@ -40,6 +42,9 @@ export default new Vuex.Store({
     disableAlert (state) {
       state.alert = false
       clearInterval(state.alertInterval)
+    },
+    loadAlertSound (state) {
+      state.alertAudio.load()
     }
   }
 })

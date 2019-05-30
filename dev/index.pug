@@ -44,9 +44,9 @@ html(lang="en")
               img.icon--selected(src='/public/images/Icon/IntervalSelected.svg' alt='Interval Icon')
               span Interval
           .section-group
-            a
+            a.icon(@click="toggleFullscreen")
               img(src='/public/images/Icon/baseline-fullscreen-24px.svg' alt='Fullscreen Icon')
-            a(@click="toggleSettings")
+            a.icon(@click="toggleSettings")
               img(src='/public/images/Icon/twotone-settings-24px.svg' alt='Settings Icon')
       settings    
     script(src="/public/scripts/index.js")

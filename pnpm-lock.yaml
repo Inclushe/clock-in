@@ -2,6 +2,7 @@ dependencies:
   '@vue/component-compiler-utils': 2.6.0
   cssnano: 4.1.10
   dayjs: 1.8.14
+  fscreen: 1.0.2
   parcel: 1.12.3
   pug: 2.0.3
   sass: 1.20.1
@@ -2386,6 +2387,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+  /fscreen/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-xMUdltgZ11oZ1yjg30Rfm+m7mE8=
   /fsevents/1.2.9:
     bundledDependencies:
       - node-pre-gyp
@@ -5530,6 +5535,7 @@ specifiers:
   '@vue/component-compiler-utils': ^2.6.0
   cssnano: ^4.1.10
   dayjs: ^1.8.14
+  fscreen: ^1.0.2
   parcel: ^1.12.3
   pug: ^2.0.3
   sass: ^1.17.4
