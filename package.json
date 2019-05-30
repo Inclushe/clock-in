@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "parcel ./dev/index.pug  --port 8080",
-    "build": "rm -r dist/ && parcel build ./dev/index.pug -d ./dist/ --no-minify && cp ./dev/CNAME ./dist/CNAME",
+    "build": "parcel build ./dev/index.pug -d ./dist/ --no-minify && cp ./dev/CNAME ./dist/CNAME",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Inclushe",
