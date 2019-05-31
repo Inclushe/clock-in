@@ -5,6 +5,7 @@
 @import '_clock'
 @import '_timer'
 @import '_stopwatch'
+@import '_alarm'
 
 html
   touch-action: manipulation
@@ -12,7 +13,6 @@ html
 
 *::webkit-selection
   background: transparent
-
 
 body
   margin: 0
@@ -125,19 +125,27 @@ body
       width: 6em
 
 .input
-  grid-row: 4 / -1
-  grid-column: 4 / 22
-  padding-right: 2em
   background-color: secondaryColor
   border-radius: 1rem
+  &--timer
+    grid-row: 4 / -1
+    grid-column: 4 / 22
+    padding-right: 2em
+    input#input
+      font-size: 16em
+      text-align: right
+  &--alarm
+    grid-row: 4 / 8
+    grid-column: 14 / 22
+    input#input
+      font-size: 10em
+      text-align: center
   input#input
     background: transparent
     color: tertiaryColor
     height: 100%
     width: 100%
     font-family: 'Graduate', sans-serif
-    font-size: 16em
-    text-align: right
     font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
     border: none
 

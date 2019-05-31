@@ -1,5 +1,10 @@
 <template lang="pug">
-  h1 Pomodoro
+  div.section-container
+    #border
+      include ../images/border.svg
+    #header()
+      img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
+      h2 Pomodoro
 </template>
 
 <script>

@@ -5,7 +5,7 @@
     #outlineBorder
       include ../images/intersect.svg
     #header(v-if="timer.state === 'waiting'")
-      img(src="../images/Icon/Timer.svg")
+      img(src="../images/Icon/Timer.svg" alt="Timer Icon")
       h2 Timer
     #clock(v-if="timer.state === 'running' || timer.state === 'paused'").time-style
       transition(name="tick")
@@ -22,7 +22,7 @@
       div.colon :
       div.number 0
       div.number 0
-    .input(v-if="timer.state === 'waiting'" @keydown.enter="startTimer")
+    .input.input--timer(v-if="timer.state === 'waiting'" @keydown.enter="startTimer")
       input#input(type="text" v-model="timerInput")
     .time-button-section.time-button-section--short
       .time-button(@click="resetTimer" v-if="timer.state !== 'waiting'")

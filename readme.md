@@ -48,8 +48,9 @@ npm run watch
   - [ ] Fix scrollbar `BACKBURNER`
 - [ ] Alarm
   - [ ] Create Alarm Toggle List
-  - [ ] Create Timer Create
-  - [ ] Hook current time into checking for alarms
+  - [ ] Save Alarms differently (render from dayjs in interval instead)
+  - [X] Create Timer Create
+  - [X] Hook current time into checking for alarms
 - [ ] Pomodoro
   _ [ ] Make the same as timer
   - [ ] Breaks should be green
