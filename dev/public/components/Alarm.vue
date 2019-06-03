@@ -17,12 +17,14 @@
       img(src="../images/Icon/Alarm.svg" alt="Alarm Icon")
       h2 Alarm
     .alarms(v-if="alarm.state === 'waiting'")
+      //- transition-group(name="list" tag="li")
       ul
-        li(v-for="alarm in alarm.alarms")
+        li(v-for="alarm in alarm.alarms" v-bind:key="alarm.id")
           label.alarm-toggle(:for="alarm.id")
             input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")
             span
-          span {{ alarm.relativeTime + alarm.relativeMeridiem }}
+          span.time-style {{ alarm.relativeTime + alarm.relativeMeridiem }}
+          a(@click="removeAlarm(alarm.id)") Delete
     .alarm-section(v-if="alarm.state === 'waiting'")
       .alarm-section_header
         h2 ADD ALARM
@@ -42,7 +44,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import dayjs from 'dayjs'
 
 export default {
@@ -64,7 +66,8 @@ export default {
       })
       this.input = ''
     },
-    ...mapActions({ stopAlarm: 'alarm/stopAlarm' })
+    ...mapActions({ stopAlarm: 'alarm/stopAlarm' }),
+    ...mapMutations({removeAlarm: 'alarm/removeAlarm'})
   }
 }
 </script>

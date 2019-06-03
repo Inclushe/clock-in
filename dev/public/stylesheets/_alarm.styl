@@ -51,14 +51,21 @@
       color: bgColor
 
 .alarms
-  grid-row: 4 / 14
-  grid-column: 4 / -1
+  grid-row: 4 / -1
+  grid-column: 4 / 14
+  li
+    margin-bottom 1em
+    display: flex
+    justify-content: flex-start
+    align-items: flex-start
+    .time-style
+      font-size: 4em
 label.alarm-toggle
   position: relative
   input
     clip-path: polygon(0 0)
   span
-    padding-left: 4em
+    padding-left: 8em
     cursor: pointer
     &::before
       box-sizing: border-box
@@ -67,24 +74,26 @@ label.alarm-toggle
       position: absolute
       top: 0
       left: 0
-      height: 2em
-      width: 4em
+      height: 4em
+      width: 8em
       border: 0.25em solid mainColor
-      border-radius: 1em
+      border-radius: 2em
       transition: background-color 500ms sharpEase
     &::after
+      box-sizing: border-box
       content: ''
       display: block
       position: absolute
-      top: 0.5em
-      left: 0.5em
-      height: 1em
-      width: 1em
+      top: 1em
+      left: 1em
+      height: 2em
+      width: 2em
       border-radius: 1em
       background: mainColor
-      transition: left 500ms sharpEase
+      transition: background-color 500ms sharpEase, left 500ms sharpEase
   & > input:checked + span::before
-    background: secondaryColor
+    background: mainColor
   & > input:checked + span::after
-    left: 2.5em
+    background: bgColor
+    left: 5em
       
