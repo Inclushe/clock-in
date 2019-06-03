@@ -2,7 +2,7 @@
 
 div div.number.tick, #seconds div.tick
   &-enter-active
-    transition: -webkit-transform 1000ms cubic-bezier(0,1,0,1), opacity 0s
+    transition: -webkit-transform 1000ms sharpEase, opacity 0s
   &-leave-active
     position: absolute
     opacity: 0
@@ -17,7 +17,7 @@ div div.number.tick, #seconds div.tick
 
 .container .section-container.section
   &-enter-active
-    transition: -webkit-transform 1000ms cubic-bezier(0,1,0,1)
+    transition: -webkit-transform 1000ms sharpEase
   &-leave-active
     transition: 0ms
   &-enter
@@ -38,6 +38,9 @@ div div.number.tick, #seconds div.tick
 .fade-leave-active {
   opacity: 0
 }
+
+.meridiem-radio-section label.label span
+  transition: background-color 500ms sharpEase, color 500ms sharpEase
 
 @keyframes alert
   0%

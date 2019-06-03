@@ -18,15 +18,23 @@
       h2 Alarm
     .alarms(v-if="alarm.state === 'waiting'")
       ul
-        li(v-for="alarm in alarm.alarms") {{ alarm.time }}
+        li(v-for="alarm in alarm.alarms")
+          label.alarm-toggle(:for="alarm.id")
+            input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")
+            span
+          span {{ alarm.relativeTime + alarm.relativeMeridiem }}
     .alarm-section(v-if="alarm.state === 'waiting'")
       .alarm-section_header
         h2 ADD ALARM
     .input.input--alarm(v-if="alarm.state === 'waiting'")
       input#input(v-model="input")
     .meridiem-radio-section(v-if="alarm.state === 'waiting'")
-      input.meridiem-radio.am(v-model="meridiem" type="radio" name="meridiem" value="AM" checked)
-      input.meridiem-radio.pm(v-model="meridiem" type="radio" name="meridiem" value="PM")
+      label.label.label--am(for="am")
+        input.meridiem-radio#am(v-model="meridiem" type="radio" name="meridiem" value="AM" checked)
+        span AM
+      label.label.label--pm(for="pm")
+        input.meridiem-radio#pm(v-model="meridiem" type="radio" name="meridiem" value="PM")
+        span PM
     #fab(@click="addAlarm" v-if="alarm.state === 'waiting'")
       img(src="../images/Icon/Add.svg" alt="Add Icon")
     #fab(@click="stopAlarm" v-if="alarm.state === 'done'")
@@ -49,24 +57,12 @@ export default {
   },
   methods: {
     addAlarm () {
-      let inputArray = this.input.split(':')
-      let hours = parseInt(inputArray[0])
-      // @TODO: Possible bug handling 12 hour
-      // @TODO: Time should not be handled as dayjs (from today)
-      hours = this.meridiem === 'AM' ? hours : hours + 12
-      hours = hours.toString()
-      hours = hours.length === 1 ? '0' + hours : hours
-      let minutes = parseInt(inputArray[1])
-      let alarmTime = dayjs(dayjs().format(`YYYY-MM-DDT${hours}:${minutes}:00.000`))
-      let diff = alarmTime.diff(dayjs())
-      if (diff <= 0) {
-        alarmTime = alarmTime.add(1, 'day')
-      }
-      console.log(alarmTime.format(`YYYY-MM-DD hh:mm A`))
       this.$store.dispatch('alarm/addAlarm', {
-        time: alarmTime,
+        relativeTime: this.input,
+        relativeMeridiem: this.meridiem,
         enabled: true
       })
+      this.input = ''
     },
     ...mapActions({ stopAlarm: 'alarm/stopAlarm' })
   }

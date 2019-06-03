@@ -19,14 +19,72 @@
   grid-row: 8 / 9
   grid-column: 14 / 22
   display: flex
+  justify-content: space-around
   .meridiem-radio
-    background: mainColor
-    color: bgColor
-    width: 9em
-    display: flex
-    justify-content: center
-    align-items: center
-    border-radius: 1em
+    clip-path: polygon(0 0)
+  label.label
+    // width: 9em
+    // display: flex
+    // justify-content: center
+    // align-items: center
+    // flex-direction: column-reverse
+    // border-radius: 1em
+    // border: 0.25em solid mainColor
+    // color: mainColor
     span
-      font-size: 1.5em
+      width: 7em
+      height: 2em
+      display: flex
+      justify-content: center
+      align-items: center
+      text-align: center
+      flex-direction: column-reverse
+      border-radius: 1em
+      border: 0.125em solid mainColor
+      color: mainColor
+      font-size: 2em
       font-weight: bold
+      border-radius: 1em
+      cursor: pointer
+    input:checked + span
+      background: mainColor
+      color: bgColor
+
+.alarms
+  grid-row: 4 / 14
+  grid-column: 4 / -1
+label.alarm-toggle
+  position: relative
+  input
+    clip-path: polygon(0 0)
+  span
+    padding-left: 4em
+    cursor: pointer
+    &::before
+      box-sizing: border-box
+      content: ''
+      display: block
+      position: absolute
+      top: 0
+      left: 0
+      height: 2em
+      width: 4em
+      border: 0.25em solid mainColor
+      border-radius: 1em
+      transition: background-color 500ms sharpEase
+    &::after
+      content: ''
+      display: block
+      position: absolute
+      top: 0.5em
+      left: 0.5em
+      height: 1em
+      width: 1em
+      border-radius: 1em
+      background: mainColor
+      transition: left 500ms sharpEase
+  & > input:checked + span::before
+    background: secondaryColor
+  & > input:checked + span::after
+    left: 2.5em
+      
