@@ -53,3 +53,17 @@ div div.number.tick, #seconds div.tick
     color: mainColor
   50%
     color: bgColor
+
+.alarms li.list
+  &-enter-active
+    transition: 500ms sharpEase
+  &-leave-active
+    transition: 500ms sharpEase
+  &-enter
+    height: 0
+    opacity: 0
+    margin-bottom: 0
+  &-leave-to
+    height: 0
+    opacity: 0
+    margin-bottom: 0

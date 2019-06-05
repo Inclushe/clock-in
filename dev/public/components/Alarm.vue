@@ -17,14 +17,16 @@
       img(src="../images/Icon/Alarm.svg" alt="Alarm Icon")
       h2 Alarm
     .alarms(v-if="alarm.state === 'waiting'")
-      //- transition-group(name="list" tag="li")
       ul
-        li(v-for="alarm in alarm.alarms" v-bind:key="alarm.id")
-          label.alarm-toggle(:for="alarm.id")
-            input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")
-            span
-          span.time-style {{ alarm.relativeTime + alarm.relativeMeridiem }}
-          a(@click="removeAlarm(alarm.id)") Delete
+        transition-group(name="list" mode="out-in")
+          li(v-for="alarm in alarm.alarms" v-bind:key="alarm.id")
+            label.alarm-toggle(:for="alarm.id")
+              input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")
+              span
+            span.time-style {{ alarm.relativeTime }}
+            span.meridiem {{ alarm.relativeMeridiem }}
+            a(@click="removeAlarm(alarm.id)")
+              img.icon.icon--delete(src="../images/Icon/twotone-delete-24px.svg" alt="Delete Icon")
     .alarm-section(v-if="alarm.state === 'waiting'")
       .alarm-section_header
         h2 ADD ALARM

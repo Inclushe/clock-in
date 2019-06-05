@@ -60,6 +60,15 @@
     align-items: flex-start
     .time-style
       font-size: 4em
+  span.time-style
+    width: 3em
+  img.icon--delete
+    padding: 0.5em
+    cursor: pointer
+  span.meridiem
+    width: 3em
+    font-size: 2em
+    font-weight: bold
 label.alarm-toggle
   position: relative
   input
@@ -72,9 +81,9 @@ label.alarm-toggle
       content: ''
       display: block
       position: absolute
-      top: 0
+      top: 0.5em
       left: 0
-      height: 4em
+      height: 3em
       width: 8em
       border: 0.25em solid mainColor
       border-radius: 2em
@@ -84,10 +93,10 @@ label.alarm-toggle
       content: ''
       display: block
       position: absolute
-      top: 1em
+      top: 1.25em
       left: 1em
-      height: 2em
-      width: 2em
+      height: 1.5em
+      width: 1.5em
       border-radius: 1em
       background: mainColor
       transition: background-color 500ms sharpEase, left 500ms sharpEase
@@ -95,5 +104,5 @@ label.alarm-toggle
     background: mainColor
   & > input:checked + span::after
     background: bgColor
-    left: 5em
+    left: 5.5em
       
