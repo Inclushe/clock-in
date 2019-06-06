@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import timer from './modules/timer'
 import stopwatch from './modules/stopwatch'
 import alarm from './modules/alarm'
+import interval from './modules/interval'
 import alertSound from '../audio/alert_simple.ogg'
 
 Vue.use(Vuex)
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     timer,
     stopwatch,
-    alarm
+    alarm,
+    interval
   },
   state: {
     currentTime: dayjs(),

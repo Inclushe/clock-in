@@ -30,6 +30,7 @@ export default {
     updateTimerDifference (context) {
       let differenceTimestamp = dayjs(context.state.endTimestamp.diff(dayjs().utc())).utc()
       console.log(differenceTimestamp.valueOf())
+      // Ring when timer hits one second to account for added second
       if (differenceTimestamp.valueOf() <= 1000) {
         clearInterval(context.state.timeInterval)
         context.state.state = 'done'

@@ -24,7 +24,6 @@ npm run watch
   - [X] Create Entrance/Exit Animation
   - [X] Set up Vue Router
   - [ ] Scale layout to width
-  - [ ] Change secondary and tertiary colors
 - [ ] Clock
   - [X] Make the clock functional
   - [X] Add Tick Animation
@@ -44,14 +43,14 @@ npm run watch
   - [ ] Add notice for autoplaying disabled or find out how to "bypass" (intent)
   - [X] Add animation
   - [X] Change progress indicator pattern to svg
-- [ ] Stopwatch
-  - [ ] Fix scrollbar `BACKBURNER`
-- [ ] Alarm
-  - [ ] Create Alarm Toggle List
-  - [ ] Save Alarms differently (render from dayjs in interval instead)
+- [X] Stopwatch
+- [X] Alarm
+  - [X] Create Alarm Toggle List
+  - [X] Save Alarms differently (render from dayjs in interval instead)
   - [X] Create Timer Create
   - [X] Hook current time into checking for alarms
 - [ ] Pomodoro
+  - [ ] Plan
   _ [ ] Make the same as timer
   - [ ] Breaks should be green
   - [ ] Add Settings
@@ -72,3 +71,5 @@ npm run watch
   - [ ] Add animation
   - [ ] Add color picker (css color variables and change back imgs to svgs)
   - [ ] Add 24 hour option
+- [ ] Gripes & Fixes
+  - [ ] Move Interval to local data
