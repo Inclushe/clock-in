@@ -14,11 +14,14 @@
       transition(name="tick" :key="currentTime.format('mm')[1]")
         div.number(:key="currentTime.format('mm')[1]") {{ currentTime.format('mm')[1] }}
     #header(v-if="alarm.state === 'waiting'")
-      img(src="../images/Icon/Alarm.svg" alt="Alarm Icon")
-      h2 Alarm
+      div
+        img(src="../images/Icon/Alarm.svg" alt="Alarm Icon")
+        h2 Alarm
     .alarms(v-if="alarm.state === 'waiting'")
       ul
         transition-group(name="list" mode="out-in")
+          li(v-if="alarm.alarms.length === 0" v-bind:key="1")
+            h3 Add an alarm on the right.
           li(v-for="alarm in alarm.alarms" v-bind:key="alarm.id")
             label.alarm-toggle(:for="alarm.id")
               input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")

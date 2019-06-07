@@ -1,0 +1,57 @@
+.constant-section
+  grid-row: 4 / -1 
+  grid-column: 4 / 10 
+.variable-section
+  grid-row: 4 / -1 
+  grid-column: 10 / 22
+
+label.intervalRadio
+  position: relative
+  // height 8em
+  // width 8em
+  cursor: pointer
+  input
+    position: absolute
+    clip-path: polygon(0 0)
+  span.text
+    margin-left: 1.66em
+    font-size: 3em
+    font-weight: bold
+    text-transform: uppercase
+    vertical-align: middle
+  span.input
+    position: absolute
+    top: 0
+    margin-left: 0em
+    margin-top: -1em
+    &::before
+      box-sizing: border-box
+      content: ''
+      display: block
+      position: absolute
+      top: 0
+      left: 0
+      height: 4em
+      width: 4em
+      border: 0.5em solid mainColor
+      border-radius: 4em
+      transition: background-color 500ms sharpEase
+    &::after
+      content: ''
+      display: block
+      position: absolute
+      top: 2em
+      left: 2em
+      height: 0em
+      width: 0em
+      border-radius: 4em
+      background: bgColor
+      transition: 500ms sharpEase
+  & > input:checked + span::before
+    background: secondaryColor
+  & > input:checked + span::after
+    height: 2em
+    width: 2em
+    top: 1em
+    left: 1em
+    background: mainColor

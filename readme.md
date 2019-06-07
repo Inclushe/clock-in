@@ -50,8 +50,10 @@ npm run watch
   - [X] Create Timer Create
   - [X] Hook current time into checking for alarms
 - [ ] Pomodoro
-  - [ ] Plan
-  _ [ ] Make the same as timer
+  - [X] Plan
+  _ [X] Make the same as interval
+  - [ ] Interval progress (where seconds are)
+  - [ ] Add sounds (in material)
   - [ ] Breaks should be green
   - [ ] Add Settings
     - [ ] Work Break Length
@@ -62,14 +64,19 @@ npm run watch
     - [ ] Start automatically
     - [ ] Disable pausing
 - [ ] Interval
-  - [ ] Constant
-  - [ ] Variable
+  - [X] Constant
+  - [X] Variable
+  - [ ] Add layout
+    - [ ] Constant
+    - [ ] Variable
   - [ ] Interval progress (where seconds are)
 - [ ] Settings
   - [X] Create Sliding Pane
   - [ ] Properly shrink viewport
   - [ ] Add animation
-  - [ ] Add color picker (css color variables and change back imgs to svgs)
   - [ ] Add 24 hour option
 - [ ] Gripes & Fixes
-  - [ ] Move Interval to local data
+  - [ ] State should not be mutated outside mutation handlers (strict: true)
+    - [ ] Move Interval to local data
+  - [ ] Add disabled states
+  - [ ] Adjust colors (red, green, grays palette)

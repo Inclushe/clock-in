@@ -6,6 +6,8 @@
 @import '_timer'
 @import '_stopwatch'
 @import '_alarm'
+@import '_pomodoro'
+@import '_interval'
 
 html
   touch-action: manipulation
@@ -68,13 +70,18 @@ body
   grid-row: 2 / 4
   grid-column: 4 / 22
   display: flex
+  justify-content: space-between
   align-items: center
   img
     margin-right: 1em
+    vertical-align: top
   h2
+    display: inline-block
     text-transform: uppercase
     font-weight: bold
     font-size: 3em
+  span
+    font-size: 2em
 
 .time-style
   display: flex

@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     state: 'waiting',
-    type: 'variable',
+    type: 'constant',
     config: {
       constant: {
         intervalCount: 5,
