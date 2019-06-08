@@ -6,27 +6,29 @@
       div
         img(src="../images/Icon/Interval.svg" alt="Interval Icon")
         h2 Interval
-    .constant-section
-      label(for="constant" class="intervalRadio")
-        input(type="radio" name="type" value="constant" id="constant" v-model="interval.type")
-        span.input
-        span.text Constant
+    .constant-section(v-if="interval.state === 'waiting'")
+      .section-header
+        label(for="constant" class="intervalRadio")
+          input(type="radio" name="type" value="constant" id="constant" v-model="interval.type")
+          span.input
+          span.text Constant
       .input.input--interval(v-if="interval.state === 'waiting'" @keydown.enter="startInterval" :disabled="interval.type !== 'constant'")
         input#input(type="text" v-model="interval.config.constant.intervalLength" :disabled="interval.type !== 'constant'")
       .repeatInterval
         span Repeat
         input(type="number" v-model="interval.config.constant.intervalCount" min="1" :disabled="interval.type !== 'constant'")
         span Times
-    .variable-section
-      label(for="variable" class="intervalRadio")
-        input(type="radio" name="type" value="variable" id="variable" v-model="interval.type")
-        span.input
-        span.text Variable
-      button(@click="addVariableInterval") Add Interval
-      ul.variableIntervals
+    .variable-section(v-if="interval.state === 'waiting'")
+      .section-header
+        label(for="variable" class="intervalRadio")
+          input(type="radio" name="type" value="variable" id="variable" v-model="interval.type")
+          span.input
+          span.text Variable
+        img.icon(src="../images/Icon/AddWhite.svg" @click="addVariableInterval")
+      ul.variableIntervals(:disabled="interval.type !== 'variable'")
         li(v-for="int in interval.config.variable.intervals" :key="int.id")
-          input(v-model="int.time")
-          button(@click="removeVariableInterval(int.id)") delet this
+          input(v-model="int.time" :disabled="interval.type !== 'variable'").time-style
+          img.icon(src="../images/Icon/twotone-delete-24px-white.svg" @click="removeVariableInterval(int.id)")
     
     #clock(v-if="interval.state === 'running' || interval.state === 'paused'").time-style
       transition(name="tick")

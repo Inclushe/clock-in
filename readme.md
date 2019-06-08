@@ -69,7 +69,7 @@ npm run watch
   - [X] Variable
   - [ ] Add layout
     - [X] Constant
-    - [ ] Variable
+    - [X] Variable
   - [ ] Interval progress and indicator
 - [ ] Settings
   - [X] Create Sliding Pane

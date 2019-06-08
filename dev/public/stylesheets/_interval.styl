@@ -2,8 +2,15 @@
   grid-row: 4 / -1 
   grid-column: 4 / 10 
 .variable-section
-  grid-row: 4 / -1 
+  grid-row: 3 / -1 
   grid-column: 12 / 22
+  img.icon
+    cursor: pointer
+    height: 3em
+.section-header
+  display: flex
+  justify-content: space-between
+  // align-items: center
 
 .input.input--interval
   margin-top: 3em
@@ -17,6 +24,7 @@
     text-align: right
     &[disabled]
       color: #999
+
 .repeatInterval
   margin-top: 2em
   span
@@ -38,28 +46,55 @@
 
 ul.variableIntervals
   background: secondaryColor
-  margin-top: 2em
-  height: 18em
+  margin-top: 1em
+  padding: 1em
+  height: 21em
+  border-radius: 1em
+  overflow-y: auto
+  &[disabled]
+    background: #444
+    color: #999
+  li
+    display: flex
+    justify-content: flex-end
+    padding: 0.125em
+    // &:nth-of-type(2n)
+    //   background: black
+    input
+      margin-right: 0.5em
+      padding 0 0.5em
+      background: transparent
+      color: tertiaryColor
+      font-family: 'Graduate', sans-serif
+      font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
+      border: none
+      font-size: 2.5em
+      text-align: right
+      line-height: 0
+      &[disabled]
+        background: #444
+        color: #999
 
 label.intervalRadio
   position: relative
-  // height 8em
+  height: 3em
   // width 8em
   cursor: pointer
   input
     position: absolute
+    height: 3em
+    width: 3em
     clip-path: polygon(0 0)
   span.text
     margin-left: 2.5em
     font-size: 2em
     font-weight: bold
     text-transform: uppercase
-    vertical-align: middle
   span.input
     position: absolute
     top: 0
     margin-left: 0em
-    margin-top: -1em
+    margin-top: -0.5em
     &::before
       box-sizing: border-box
       content: ''
