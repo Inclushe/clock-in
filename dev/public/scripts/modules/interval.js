@@ -1,5 +1,6 @@
 import router from '../router'
 import dayjs from 'dayjs'
+import uuidv4 from 'uuid/v4'
 
 export default {
   namespaced: true,
@@ -12,7 +13,7 @@ export default {
         intervalLength: '0:05'
       },
       variable: {
-        intervals: ['0:02', '0:03', '0:04']
+        intervals: []
       }
     },
     currentInterval: 0,
@@ -27,6 +28,27 @@ export default {
       clearInterval(state.intervalInterval)
       state.pausedTimestamp = dayjs().utc()
       state.state = 'paused'
+    },
+    addVariableInterval (state) {
+      let interval
+      if (state.config.variable.intervals.length > 0) {
+        interval = {
+          time: state.config.variable.intervals[state.config.variable.intervals.length - 1].time
+        }
+      } else {
+        interval = {
+          time: '5:00'
+        }
+      }
+      interval.id = uuidv4()
+      console.log(interval)
+      state.config.variable.intervals.push(interval)
+    },
+    removeVariableInterval (state, id) {
+      let intervalIndex = state.config.variable.intervals.findIndex((el) => {
+        return (el.id === id)
+      })
+      state.config.variable.intervals.splice(intervalIndex, 1)
     }
   },
   actions: {
@@ -52,7 +74,7 @@ export default {
         // Parse end time from input
         let units = 'smh'
         for (let i = 0; i < context.state.config.variable.intervals.length; i++) {
-          let timerArray = context.state.config.variable.intervals[i].split(':').reverse().slice(0, 3)
+          let timerArray = context.state.config.variable.intervals[i].time.split(':').reverse().slice(0, 3)
           timerArray.forEach((value, index) => {
             calculatedTime = calculatedTime.add(value, units[index])
           })

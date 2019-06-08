@@ -3,7 +3,43 @@
   grid-column: 4 / 10 
 .variable-section
   grid-row: 4 / -1 
-  grid-column: 10 / 22
+  grid-column: 12 / 22
+
+.input.input--interval
+  margin-top: 3em
+  // grid-row: 5 / 8 
+  // grid-column: 4 / 10
+  padding-right: 1em
+  &[disabled]
+    background: #444
+  input#input
+    font-size: 5em
+    text-align: right
+    &[disabled]
+      color: #999
+.repeatInterval
+  margin-top: 2em
+  span
+    font-size: 2em
+    text-transform: uppercase
+  input
+    display: inline-block
+    margin: 0 1em
+    padding: 0 0.5em
+    width: 2em
+    font-size: 2em
+    background: secondaryColor
+    color: tertiaryColor
+    font-family: inherit
+    border: none
+    &[disabled]
+      background: #444
+      color: #999
+
+ul.variableIntervals
+  background: secondaryColor
+  margin-top: 2em
+  height: 18em
 
 label.intervalRadio
   position: relative
@@ -14,8 +50,8 @@ label.intervalRadio
     position: absolute
     clip-path: polygon(0 0)
   span.text
-    margin-left: 1.66em
-    font-size: 3em
+    margin-left: 2.5em
+    font-size: 2em
     font-weight: bold
     text-transform: uppercase
     vertical-align: middle
@@ -31,17 +67,17 @@ label.intervalRadio
       position: absolute
       top: 0
       left: 0
-      height: 4em
-      width: 4em
-      border: 0.5em solid mainColor
+      height: 3em
+      width: 3em
+      border: 0.25em solid mainColor
       border-radius: 4em
       transition: background-color 500ms sharpEase
     &::after
       content: ''
       display: block
       position: absolute
-      top: 2em
-      left: 2em
+      top: 1.5em
+      left: 1.5em
       height: 0em
       width: 0em
       border-radius: 4em
@@ -50,8 +86,8 @@ label.intervalRadio
   & > input:checked + span::before
     background: secondaryColor
   & > input:checked + span::after
-    height: 2em
-    width: 2em
-    top: 1em
-    left: 1em
+    height: 1.5em
+    width: 1.5em
+    top: 0.75em
+    left: 0.75em
     background: mainColor

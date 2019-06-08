@@ -11,13 +11,23 @@
         input(type="radio" name="type" value="constant" id="constant" v-model="interval.type")
         span.input
         span.text Constant
+      .input.input--interval(v-if="interval.state === 'waiting'" @keydown.enter="startInterval" :disabled="interval.type !== 'constant'")
+        input#input(type="text" v-model="interval.config.constant.intervalLength" :disabled="interval.type !== 'constant'")
+      .repeatInterval
+        span Repeat
+        input(type="number" v-model="interval.config.constant.intervalCount" min="1" :disabled="interval.type !== 'constant'")
+        span Times
     .variable-section
       label(for="variable" class="intervalRadio")
         input(type="radio" name="type" value="variable" id="variable" v-model="interval.type")
         span.input
         span.text Variable
-    .input.input--interval(v-if="interval.state === 'waiting'" @keydown.enter="startInterval")
-      input#input(type="text" v-model="interval.config.constant.intervalLength")
+      button(@click="addVariableInterval") Add Interval
+      ul.variableIntervals
+        li(v-for="int in interval.config.variable.intervals" :key="int.id")
+          input(v-model="int.time")
+          button(@click="removeVariableInterval(int.id)") delet this
+    
     #clock(v-if="interval.state === 'running' || interval.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="interval.currentProgress.format('mm')[0] !== '0'" :key="interval.currentProgress.format('mm')[0]") {{ interval.currentProgress.format('mm')[0] }}
@@ -45,7 +55,11 @@ export default {
     ...mapState(['interval'])
   },
   methods: {
-    ...mapMutations({pauseInterval: 'interval/pauseInterval'}),
+    ...mapMutations({
+      pauseInterval: 'interval/pauseInterval',
+      addVariableInterval: 'interval/addVariableInterval',
+      removeVariableInterval: 'interval/removeVariableInterval'
+    }),
     ...mapActions({
       startInterval: 'interval/startInterval',
       unpauseInterval: 'interval/unpauseInterval',

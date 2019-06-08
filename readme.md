@@ -55,6 +55,7 @@ npm run watch
   - [ ] Interval progress (where seconds are)
   - [ ] Add sounds (in material)
   - [ ] Breaks should be green
+  - [ ] Autopause should work
   - [ ] Add Settings
     - [ ] Work Break Length
     - [ ] Short Break Length
@@ -67,9 +68,9 @@ npm run watch
   - [X] Constant
   - [X] Variable
   - [ ] Add layout
-    - [ ] Constant
+    - [X] Constant
     - [ ] Variable
-  - [ ] Interval progress (where seconds are)
+  - [ ] Interval progress and indicator
 - [ ] Settings
   - [X] Create Sliding Pane
   - [ ] Properly shrink viewport
