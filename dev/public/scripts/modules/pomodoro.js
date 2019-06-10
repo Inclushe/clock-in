@@ -17,7 +17,7 @@ export default {
     },
     currentInterval: 0,
     intervalTimestamps: [],
-    currentProgress: '',
+    currentProgress: null,
     startTimestamp: null,
     pausedTimestamp: null,
     pomodoroInterval: null

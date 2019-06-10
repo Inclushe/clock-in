@@ -52,7 +52,7 @@ npm run watch
 - [ ] Pomodoro
   - [X] Plan
   _ [X] Make the same as interval
-  - [ ] Interval progress (where seconds are)
+  - [X] Interval progress (where seconds are)
   - [ ] Add sounds (in material)
   - [ ] Breaks should be green
   - [ ] Autopause should work
@@ -70,14 +70,33 @@ npm run watch
   - [ ] Add layout
     - [X] Constant
     - [X] Variable
-  - [ ] Interval progress and indicator
+  - [X] Interval progress and indicator
 - [ ] Settings
   - [X] Create Sliding Pane
   - [ ] Properly shrink viewport
   - [ ] Add animation
   - [ ] Add 24 hour option
 - [ ] Gripes & Fixes
+  - [ ] App should fit in the viewport
+  - [ ] Fade when inactive
+  - [ ] Interval and Pomodoro should have an indicator for what interval they're on
   - [ ] State should not be mutated outside mutation handlers (strict: true)
-    - [ ] Move Interval to local data
-  - [ ] Add disabled states
-  - [ ] Adjust colors (red, green, grays palette)
+    - Potential drawback is that components are destroyed
+  - [ ] Add disabled states to button
+  - [ ] Adjust colors
+    - [ ] make red, green, grays palette
+  - [ ] Make color palette and fix colors
+  - [ ] fix hours
+    - [ ] Timer
+    - [ ] Pomodoro (lol)
+    - [ ] Interval
+  - [ ] Fix settings
+  - [ ] only allow numerical input (and colons)?
+  - [ ] Input Validation
+    - [ ] Timer
+    - [ ] Alarm
+    - [ ] Pomodoro Settings
+    - [ ] Interval
+  - [ ] Add hover states for buttons
+  - [ ] Add dot on section buttons
+  - [ ] Clean up code

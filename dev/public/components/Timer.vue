@@ -1,6 +1,6 @@
 <template lang="pug">
   div.section-container
-    #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)` }")
+    #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: 'clip-path 100ms linear' }")
       include ../images/border.svg
     #outlineBorder
       include ../images/intersect.svg
@@ -62,7 +62,7 @@ export default {
         // console.log('per')
         // console.log(this.timer.differenceTimestamp.valueOf() - 1000, this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf())
         // console.log('perend')
-        return ((this.timer.differenceTimestamp.valueOf() - 1000) / (this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf()))
+        return ((this.timer.differenceTimestamp.valueOf() - 1100) / (this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf()))
       }
     }
   },

@@ -1,7 +1,9 @@
 <template lang="pug">
   div.section-container
-    #border
+    #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
       include ../images/border.svg
+    #outlineBorder
+      include ../images/intersect.svg
     #header(v-if="pomodoro.state === 'waiting'")
       div
         img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
@@ -37,8 +39,41 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      changed: false
+    }
+  },
   computed: {
-    ...mapState(['pomodoro'])
+    ...mapState(['pomodoro']),
+    percent () {
+      if (this.pomodoro.startTimestamp == null || this.pomodoro.state === 'waiting' || this.changed) {
+        return 1
+      } else if (this.pomodoro.state === 'done') {
+        return 0
+      } else {
+        let begin, end
+        if (this.pomodoro.currentInterval == 0) {
+          begin = this.pomodoro.startTimestamp
+        } else {
+          begin = this.pomodoro.intervalTimestamps[currentInterval - 1].timestamp
+        }
+        end = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval].timestamp
+        console.log(end.valueOf())
+        return ((this.pomodoro.currentProgress.valueOf() - 1100) / (end.valueOf() - begin.valueOf()))
+      }
+    }
+  },
+  watch: {
+    'interval.currentInterval': function () {
+      this.changed = true
+      console.log(this.changed)
+      let self = this
+      setTimeout(function () {
+        self.changed = false
+        console.log(self.changed)
+      }, 100)
+    }
   },
   methods: {
     ...mapMutations({pausePomodoro: 'pomodoro/pausePomodoro'}),

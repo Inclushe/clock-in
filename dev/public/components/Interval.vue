@@ -1,7 +1,9 @@
 <template lang="pug">
   div.section-container
-    #border
+    #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
       include ../images/border.svg
+    #outlineBorder
+      include ../images/intersect.svg
     #header(v-if="interval.state === 'waiting'")
       div
         img(src="../images/Icon/Interval.svg" alt="Interval Icon")
@@ -53,8 +55,40 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      changed: false
+    }
+  },
   computed: {
-    ...mapState(['interval'])
+    ...mapState(['interval']),
+    percent () {
+      if (this.interval.startTimestamp == null || this.interval.state === 'waiting' || this.changed) {
+        return 1
+      } else if (this.interval.state === 'done') {
+        return 0
+      } else {
+        let begin, end
+        if (this.interval.currentInterval == 0) {
+          begin = this.interval.startTimestamp
+        } else {
+          begin = this.interval.intervalTimestamps[this.interval.currentInterval - 1]
+        }
+        end = this.interval.intervalTimestamps[this.interval.currentInterval]
+        return ((this.interval.currentProgress.valueOf() - 1100) / (end.valueOf() - begin.valueOf()))
+      }
+    }
+  },
+  watch: {
+    'interval.currentInterval': function () {
+      this.changed = true
+      console.log(this.changed)
+      let self = this
+      setTimeout(function () {
+        self.changed = false
+        console.log(self.changed)
+      }, 100)
+    }
   },
   methods: {
     ...mapMutations({
