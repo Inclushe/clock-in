@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import { mapState, mapMutations } from 'vuex'
 import VueRouter from 'vue-router'
 import fscreen from 'fscreen'
@@ -20,9 +19,11 @@ Vue.use(VueRouter)
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
+  components: { Settings },
   store,
   router,
   // computed: mapState(['currentTime']),
+  computed: mapState(['settingsToggle', 'alert']),
   mounted () {
     let self = this
     setInterval(function () {
@@ -30,7 +31,6 @@ new Vue({
     }, 100)
     this.$store.commit('loadAlertSound')
   },
-  computed: mapState(['settingsToggle', 'alert']),
   methods: {
     toggleFullscreen () {
       if (fscreen.fullscreenElement !== null) {
@@ -40,8 +40,7 @@ new Vue({
       }
     },
     ...mapMutations(['toggleSettings'])
-  },
-  components: { Settings }
+  }
 })
 
 console.log('hello')

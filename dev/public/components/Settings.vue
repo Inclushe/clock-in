@@ -7,7 +7,7 @@
     h2 Clock
     input(type="checkbox" v-model="settings.showSeconds" id="showSeconds")
     label(for="showSeconds") Show Seconds
-    h3 
+    h3
       a(@click="toggleSettings") Close
 </template>
 
