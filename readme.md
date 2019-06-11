@@ -77,14 +77,14 @@ npm run watch
   - [ ] Add animation
   - [ ] Add 24 hour option
 - [ ] Gripes & Fixes
+  - [X] Adjust colors
+    - [X] make red, green, grays palette
   - [ ] App should fit in the viewport
   - [ ] Fade when inactive
   - [ ] Interval and Pomodoro should have an indicator for what interval they're on
   - [ ] State should not be mutated outside mutation handlers (strict: true)
     - Potential drawback is that components are destroyed
   - [ ] Add disabled states to button
-  - [ ] Adjust colors
-    - [ ] make red, green, grays palette
   - [ ] Make color palette and fix colors
   - [ ] fix hours
     - [ ] Timer
@@ -100,3 +100,4 @@ npm run watch
   - [ ] Add hover states for buttons
   - [ ] Add dot on section buttons
   - [ ] Clean up code
+  - [ ] Why is timer initially slow?
