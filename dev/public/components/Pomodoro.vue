@@ -7,15 +7,23 @@
     #header(v-if="pomodoro.state === 'waiting'")
       div
         img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
-        h2 Pomodoro
+        h1 Pomodoro
       div
-        span Edit your preferred intervals in Settings.
+        h2 Edit your preferred intervals in Settings.
     #pomodoroPreview.time-style(v-if="pomodoro.state === 'waiting'")
       div.number {{ pomodoro.config.workLength.toString()[0] }}
       div.number {{ pomodoro.config.workLength.toString()[1] }}
       div.colon :
       div.number 0
       div.number 0
+    .indicator(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'")
+      div
+        img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
+        h1 Pomodoro
+      div
+        h2 {{ pomodoro.intervalTimestamps[pomodoro.currentInterval].type }} Interval
+      div
+        span.num {{ pomodoro.currentInterval + 1 }}/{{ pomodoro.intervalTimestamps.length }}
     #clock(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="pomodoro.currentProgress.format('mm')[0] !== '0'" :key="pomodoro.currentProgress.format('mm')[0]") {{ pomodoro.currentProgress.format('mm')[0] }}
@@ -56,7 +64,7 @@ export default {
         if (this.pomodoro.currentInterval == 0) {
           begin = this.pomodoro.startTimestamp
         } else {
-          begin = this.pomodoro.intervalTimestamps[currentInterval - 1].timestamp
+          begin = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval - 1].timestamp
         }
         end = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval].timestamp
         console.log(end.valueOf())
@@ -65,7 +73,7 @@ export default {
     }
   },
   watch: {
-    'interval.currentInterval': function () {
+    'pomodoro.currentInterval': function () {
       this.changed = true
       console.log(this.changed)
       let self = this

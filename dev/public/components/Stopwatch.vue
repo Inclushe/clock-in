@@ -5,7 +5,7 @@
     #header
       div
         img(src="../images/Icon/Stopwatch.svg" alt="Stopwatch Icon")
-        h2 Stopwatch
+        h1 Stopwatch
     #stopwatchTime(v-if="stopwatch.state === 'running' || stopwatch.state === 'paused'").time-style
       transition(name="tick")
         div.number(:key="hours[0]") {{ hours[0] }}

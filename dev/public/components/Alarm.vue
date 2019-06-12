@@ -16,7 +16,7 @@
     #header(v-if="alarm.state === 'waiting'")
       div
         img(src="../images/Icon/Alarm.svg" alt="Alarm Icon")
-        h2 Alarm
+        h1 Alarm
     .alarms(v-if="alarm.state === 'waiting'")
       ul
         transition-group(name="list" mode="out-in")

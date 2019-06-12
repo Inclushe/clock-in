@@ -45,7 +45,7 @@ export default {
           })
           calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'minute')
           context.state.intervalTimestamps.push({
-            type: 'short',
+            type: 'short break',
             timestamp: calculatedTime
           })
         }
@@ -57,7 +57,7 @@ export default {
         })
         calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'minute')
         context.state.intervalTimestamps.push({
-          type: 'long',
+          type: 'long break',
           timestamp: calculatedTime
         })
       }

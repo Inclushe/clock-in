@@ -7,7 +7,7 @@
     #header(v-if="timer.state === 'waiting'")
       div
         img(src="../images/Icon/Timer.svg" alt="Timer Icon")
-        h2 Timer
+        h1 Timer
     #clock(v-if="timer.state === 'running' || timer.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}

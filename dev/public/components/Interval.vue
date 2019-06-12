@@ -7,7 +7,13 @@
     #header(v-if="interval.state === 'waiting'")
       div
         img(src="../images/Icon/Interval.svg" alt="Interval Icon")
-        h2 Interval
+        h1 Interval
+    .indicator(v-if="interval.state === 'running' || interval.state === 'paused'")
+      div
+        img(src="../images/Icon/Interval.svg" alt="Interval Icon")
+        h1 Interval
+      div
+        span.num {{ interval.currentInterval + 1 }}/{{ interval.intervalTimestamps.length }}
     .constant-section(v-if="interval.state === 'waiting'")
       .section-header
         label(for="constant" class="intervalRadio")
