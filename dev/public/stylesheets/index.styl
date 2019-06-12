@@ -50,7 +50,7 @@ body
   grid-template-columns: repeat(24, 3em)
   grid-gap: 1em 1.5em
   gap: 1em 1.5em
-  font-size: 16px
+  font-size: 8px
   &.settings-active
     // justify-self: start
     transform: scale(0.5)
@@ -62,7 +62,7 @@ body
     grid-template-columns: repeat(24, 3em)
     grid-gap: 1em 1.5em
     gap: 1em 1.5em
-    font-size: 16px
+    font-size: 8px
     will-change: auto
     -webkit-transform: translateX(0)
 
@@ -74,6 +74,8 @@ body
   align-items: center
   img
     margin-right: 1em
+    height: 3em
+    width: 3em
     vertical-align: top
   h2
     display: inline-block
@@ -132,7 +134,7 @@ body
 
 .input
   background-color: gray100
-  border-radius: 1rem
+  border-radius: 1em
   &--timer
     grid-row: 4 / -1
     grid-column: 4 / 22
@@ -163,3 +165,32 @@ body
   width: 50%
   background: #445857
   color: white
+
+
+
+for scale in (1..16)
+  @media screen and (min-width: (120px * scale))
+    .container
+      font-size: (scale)px + ((16 - scale) * 0.025)
+      .section-container
+        font-size: (scale)px + ((16 - scale) * 0.025)
+  
+
+      
+// @media screen and (min-width: 1200px)
+//   .container
+//     font-size: 10px
+//     .section-container
+//       font-size: 10px
+
+// @media screen and (min-width: 1440px)
+//   .container
+//     font-size: 12px
+//     .section-container
+//       font-size: 12px
+
+// @media screen and (min-width: 1680px)
+//   .container
+//     font-size: 16px
+//     .section-container
+//       font-size: 16px

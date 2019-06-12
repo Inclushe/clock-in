@@ -79,7 +79,7 @@ npm run watch
 - [ ] Gripes & Fixes
   - [X] Adjust colors
     - [X] make red, green, grays palette
-  - [ ] App should fit in the viewport
+  - [X] App should fit in the viewport
   - [ ] Fade when inactive
   - [ ] Interval and Pomodoro should have an indicator for what interval they're on
   - [ ] State should not be mutated outside mutation handlers (strict: true)
