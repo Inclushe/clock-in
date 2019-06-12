@@ -24,7 +24,7 @@
         h2 {{ pomodoro.intervalTimestamps[pomodoro.currentInterval].type }} Interval
       div
         span.num {{ pomodoro.currentInterval + 1 }}/{{ pomodoro.intervalTimestamps.length }}
-    #clock(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'").time-style
+    #clock.clock-pomodoro(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="pomodoro.currentProgress.format('mm')[0] !== '0'" :key="pomodoro.currentProgress.format('mm')[0]") {{ pomodoro.currentProgress.format('mm')[0] }}
       transition(name="tick")

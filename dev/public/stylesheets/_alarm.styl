@@ -16,11 +16,12 @@
     h2
       font-size: 2em
 .meridiem-radio-section
-  grid-row: 8 / 9
+  grid-row: 8 / 10
   grid-column: 14 / 22
   display: flex
   justify-content: space-around
   .meridiem-radio
+    position: absolute
     clip-path: polygon(0 0)
   label.label
     // width: 9em
@@ -33,7 +34,7 @@
     // color: mainColor
     span
       width: 7em
-      height: 2em
+      height: 100%
       display: flex
       justify-content: center
       align-items: center
@@ -77,6 +78,8 @@
 label.alarm-toggle
   position: relative
   input
+    position: absolute
+    top: 0
     clip-path: polygon(0 0)
   span
     padding-left: 8em

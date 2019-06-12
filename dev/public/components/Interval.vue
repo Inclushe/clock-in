@@ -38,7 +38,7 @@
           input(v-model="int.time" :disabled="interval.type !== 'variable'").time-style
           img.icon(src="../images/Icon/twotone-delete-24px-white.svg" @click="removeVariableInterval(int.id)")
     
-    #clock(v-if="interval.state === 'running' || interval.state === 'paused'").time-style
+    #clock.clock-interval(v-if="interval.state === 'running' || interval.state === 'paused'").time-style
       transition(name="tick")
         div.number(v-if="interval.currentProgress.format('mm')[0] !== '0'" :key="interval.currentProgress.format('mm')[0]") {{ interval.currentProgress.format('mm')[0] }}
       transition(name="tick")
