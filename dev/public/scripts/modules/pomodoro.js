@@ -38,24 +38,24 @@ export default {
       context.state.startTimestamp = calculatedTime
       for (let session = 0; session < context.state.config.sessionIntervals; session++) {
         for (let shortBreak = 0; shortBreak < (context.state.config.workIntervalsUntilLongBreak - 1); shortBreak++) {
-          calculatedTime = calculatedTime.add(context.state.config.workLength, 'seconds')
+          calculatedTime = calculatedTime.add(context.state.config.workLength, 'minutes')
           context.state.intervalTimestamps.push({
             type: 'work',
             timestamp: calculatedTime
           })
-          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'seconds')
+          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'minutes')
           context.state.intervalTimestamps.push({
             type: 'short break',
             timestamp: calculatedTime
           })
         }
         // Calculate last work block and add long break
-        calculatedTime = calculatedTime.add(context.state.config.workLength, 'seconds')
+        calculatedTime = calculatedTime.add(context.state.config.workLength, 'minutes')
         context.state.intervalTimestamps.push({
           type: 'work',
           timestamp: calculatedTime
         })
-        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'seconds')
+        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'minutes')
         context.state.intervalTimestamps.push({
           type: 'long break',
           timestamp: calculatedTime
