@@ -1,9 +1,17 @@
 <template lang="pug">
-  div.section-container
-    #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
+  div.section-container(:class="{green: isBreak}")
+    #border(v-if="!isBreak" :style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
       include ../images/border.svg
-    #outlineBorder
+    #outlineBorder(v-if="!isBreak")
       include ../images/intersect.svg
+    #border(v-if="isBreak" :style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
+      include ../images/border-green.svg
+    #outlineBorder(v-if="isBreak")
+      include ../images/intersect-green.svg
+    //- #border(:style="{ 'clip-path': `polygon(0% 0%, ${percent*100}% 0%, ${percent*100}% 100%, 0% 100%)`, transition: `${changed ? 'clip-path 0ms linear' : 'clip-path 100ms linear'}` }")
+    //-   include ../images/border-green.svg
+    //- #outlineBorder
+    //-   include ../images/intersect-green.svg
     #header(v-if="pomodoro.state === 'waiting'")
       div
         img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
@@ -18,7 +26,8 @@
       div.number 0
     .indicator(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'")
       div
-        img(src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
+        img(v-if="isBreak" src="../images/Icon/PomodoroGreen.svg" alt="Pomodoro Icon")
+        img(v-else src="../images/Icon/Pomodoro.svg" alt="Pomodoro Icon")
         h1 Pomodoro
       div
         h2 {{ pomodoro.intervalTimestamps[pomodoro.currentInterval].type }} Interval
@@ -34,6 +43,9 @@
         div.number(:key="pomodoro.currentProgress.format('ss')[0]") {{ pomodoro.currentProgress.format('ss')[0] }}
       transition(name="tick")
         div.number(:key="pomodoro.currentProgress.format('ss')[1]") {{ pomodoro.currentProgress.format('ss')[1] }}
+    .time-button-section.time-button-section--short
+      .time-button(@click="resetPomodoro" v-if="pomodoro.state !== 'waiting'")
+        span Reset
     #fab(@click="startPomodoro" v-if="pomodoro.state === 'waiting'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpausePomodoro" v-else-if="pomodoro.state === 'paused'")
@@ -67,8 +79,14 @@ export default {
           begin = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval - 1].timestamp
         }
         end = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval].timestamp
-        console.log(end.valueOf())
         return ((this.pomodoro.currentProgress.valueOf() - 1100) / (end.valueOf() - begin.valueOf()))
+      }
+    },
+    isBreak () {
+      if (this.pomodoro.state === 'waiting' || this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval] === undefined) {
+        return ''
+      } else {
+        return this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval].type.includes('break')
       }
     }
   },
@@ -84,7 +102,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({pausePomodoro: 'pomodoro/pausePomodoro'}),
+    ...mapMutations({ pausePomodoro: 'pomodoro/pausePomodoro' }),
     ...mapActions({
       startPomodoro: 'pomodoro/startPomodoro',
       unpausePomodoro: 'pomodoro/unpausePomodoro',

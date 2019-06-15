@@ -48,6 +48,9 @@
         div.number(:key="interval.currentProgress.format('ss')[0]") {{ interval.currentProgress.format('ss')[0] }}
       transition(name="tick")
         div.number(:key="interval.currentProgress.format('ss')[1]") {{ interval.currentProgress.format('ss')[1] }}
+    .time-button-section.time-button-section--short
+      .time-button(@click="resetInterval" v-if="interval.state !== 'waiting'")
+        span Reset
     #fab(@click="startInterval" v-if="interval.state === 'waiting'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpauseInterval" v-else-if="interval.state === 'paused'")

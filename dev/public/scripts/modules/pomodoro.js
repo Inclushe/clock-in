@@ -38,24 +38,24 @@ export default {
       context.state.startTimestamp = calculatedTime
       for (let session = 0; session < context.state.config.sessionIntervals; session++) {
         for (let shortBreak = 0; shortBreak < (context.state.config.workIntervalsUntilLongBreak - 1); shortBreak++) {
-          calculatedTime = calculatedTime.add(context.state.config.workLength, 'minute')
+          calculatedTime = calculatedTime.add(context.state.config.workLength, 'seconds')
           context.state.intervalTimestamps.push({
             type: 'work',
             timestamp: calculatedTime
           })
-          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'minute')
+          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'seconds')
           context.state.intervalTimestamps.push({
             type: 'short break',
             timestamp: calculatedTime
           })
         }
         // Calculate last work block and add long break
-        calculatedTime = calculatedTime.add(context.state.config.workLength, 'minute')
+        calculatedTime = calculatedTime.add(context.state.config.workLength, 'seconds')
         context.state.intervalTimestamps.push({
           type: 'work',
           timestamp: calculatedTime
         })
-        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'minute')
+        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'seconds')
         context.state.intervalTimestamps.push({
           type: 'long break',
           timestamp: calculatedTime
@@ -63,6 +63,7 @@ export default {
       }
       console.log(JSON.stringify(context.state.intervalTimestamps, null, 4))
       context.dispatch('pomodoroIntervalFn')
+      context.commit('playSound', 'timer_start', { root: true })
     },
     unpausePomodoro (context) {
       let currentTime = dayjs()
@@ -81,6 +82,7 @@ export default {
       context.commit('disableAlert', null, { root: true })
     },
     pomodoroIntervalFn (context) {
+      clearInterval(context.state.pomodoroInterval)
       context.state.pomodoroInterval = setInterval(function () {
         let currentTime = dayjs()
         let timeUntilNextInterval = context.state.intervalTimestamps[context.state.currentInterval].timestamp.diff(currentTime)
@@ -100,6 +102,14 @@ export default {
           } else {
             context.state.currentInterval++
             timeUntilNextInterval = context.state.intervalTimestamps[context.state.currentInterval].timestamp.diff(currentTime)
+            let type = context.state.intervalTimestamps[context.state.currentInterval].type
+            if (type === 'short break') {
+              context.commit('playSound', 'short_break_start', { root: true })
+            } else if (type === 'long break') {
+              context.commit('playSound', 'long_break_start', { root: true })
+            } else if (type === 'work') {
+              context.commit('playSound', 'timer_start', { root: true })
+            }
           }
         } else {
           context.state.currentProgress = dayjs(timeUntilNextInterval).utc()

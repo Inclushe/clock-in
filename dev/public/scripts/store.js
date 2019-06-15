@@ -6,7 +6,7 @@ import stopwatch from './modules/stopwatch'
 import alarm from './modules/alarm'
 import interval from './modules/interval'
 import pomodoro from './modules/pomodoro'
-import alertSound from '../audio/alert_simple.ogg'
+import sounds from '../audio/*.ogg'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     clockInterval: null,
     settingsToggle: false,
     alert: false,
-    alertAudio: new Audio(alertSound),
+    alertAudio: {},
     alertInterval: null,
     settings: {
       showSeconds: true
@@ -38,19 +38,26 @@ export default new Vuex.Store({
     },
     enableAlert (state) {
       state.alert = true
-      state.alertAudio.currentTime = 0
-      state.alertAudio.play()
+      state.alertAudio['alert_simple'].currentTime = 0
+      state.alertAudio['alert_simple'].play()
       state.alertInterval = setInterval(function () {
-        state.alertAudio.currentTime = 0
-        state.alertAudio.play()
+        state.alertAudio['alert_simple'].currentTime = 0
+        state.alertAudio['alert_simple'].play()
       }, 1000)
     },
     disableAlert (state) {
       state.alert = false
       clearInterval(state.alertInterval)
     },
+    playSound (state, sound) {
+      state.alertAudio[sound].currentTime = 0
+      state.alertAudio[sound].play()
+    },
     loadAlertSound (state) {
-      state.alertAudio.load()
+      Object.keys(sounds).forEach((el) => {
+        state.alertAudio[el] = new Audio(sounds[el])
+        state.alertAudio[el].load()
+      })
     }
   }
 })

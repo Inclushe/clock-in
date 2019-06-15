@@ -53,8 +53,8 @@ npm run watch
   - [X] Plan
   _ [X] Make the same as interval
   - [X] Interval progress (where seconds are)
-  - [ ] Add sounds (in material)
-  - [ ] Breaks should be green
+  - [X] Add sounds (in material)
+  - [X] Breaks should be green
   - [ ] Autopause should work
   - [ ] Add Settings
     - [ ] Work Break Length
@@ -80,12 +80,14 @@ npm run watch
   - [X] Adjust colors
     - [X] make red, green, grays palette
   - [X] App should fit in the viewport
+  - [ ] Add interval begin flash
   - [ ] Fade when inactive
-  - [ ] Interval and Pomodoro should have an indicator for what interval they're on
+  - [X] Interval and Pomodoro should have an indicator for what interval they're on
+  - [X] Add reset buttons
   - [ ] State should not be mutated outside mutation handlers (strict: true)
     - Potential drawback is that components are destroyed
   - [ ] Add disabled states to button
-  - [ ] Make color palette and fix colors
+  - [X] Make color palette and fix colors
   - [ ] fix hours
     - [ ] Timer
     - [ ] Pomodoro (lol)

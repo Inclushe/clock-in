@@ -80,6 +80,7 @@ export default {
         })
         this.timer.endTimestamp = calculatedTime
         this.$store.dispatch('timer/timerIntervalFn')
+        this.$store.commit('playSound', 'timer_start', { root: true })
       }
     },
     ...mapMutations({pauseTimer: 'timer/pauseTimer'}),

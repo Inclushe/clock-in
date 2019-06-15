@@ -82,6 +82,7 @@ export default {
         }
       }
       context.dispatch('updateIntervalIntervalFn')
+      context.commit('playSound', 'timer_start', { root: true })
     },
     unpauseInterval (context) {
       let currentTime = dayjs()
@@ -116,6 +117,7 @@ export default {
           } else {
             context.state.currentInterval++
             timeUntilNextInterval = context.state.intervalTimestamps[context.state.currentInterval].diff(currentTime)
+            context.commit('playSound', 'timer_start', { root: true })
           }
         } else {
           context.state.currentProgress = dayjs(timeUntilNextInterval).utc()
