@@ -21,7 +21,8 @@ export default {
     currentProgress: '',
     startTimestamp: null,
     pausedTimestamp: null,
-    intervalInterval: null
+    intervalInterval: null,
+    hours: ''
   },
   mutations: {
     pauseInterval (state) {
@@ -88,6 +89,7 @@ export default {
       let currentTime = dayjs()
       let difference = currentTime.valueOf() - context.state.pausedTimestamp.valueOf()
       console.log(difference)
+      context.state.startTimestamp = dayjs(context.state.startTimestamp.utc().valueOf() + difference).utc()
       for (let i = 0; i < context.state.intervalTimestamps.length; i++) {
         console.log('before')
         console.log(context.state.intervalTimestamps[i])
@@ -121,6 +123,8 @@ export default {
           }
         } else {
           context.state.currentProgress = dayjs(timeUntilNextInterval).utc()
+          let hours = (((context.state.currentProgress.date() - 1) * 24) + context.state.currentProgress.hour()).toString()
+          context.state.hours = hours.length === 1 ? (0 + hours) : hours
           context.state.state = 'running'
         }
       }, 100)

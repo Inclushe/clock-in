@@ -53,15 +53,18 @@
       color: gray700
 
 ul.variableIntervals
-  background: secondaryColor
+  background: tertiaryColor
   margin-top: 1em
   padding: 1em
-  height: 21em
+  height: 23em
   border-radius: 1em
   overflow-y: auto
+  box-sizing: border-box
   &[disabled]
     background: gray900
     color: gray700
+  &.invalid
+    border: 1em solid mainColor
   li
     display: flex
     justify-content: flex-end
@@ -72,7 +75,7 @@ ul.variableIntervals
       margin-right: 0.5em
       padding 0 0.5em
       background: transparent
-      color: tertiaryColor
+      color: gray900
       font-family: 'Graduate', sans-serif
       font-variation-settings: "XOPQ" 40, "XTRA" 100, "OPSZ" 12, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
       border: none

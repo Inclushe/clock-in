@@ -74,32 +74,32 @@ npm run watch
 - [ ] Settings
   - [X] Create Sliding Pane
   - [ ] Properly shrink viewport
-  - [ ] Add animation
-  - [ ] Add 24 hour option
+  - [ ] Add 24 hour option ****
 - [ ] Gripes & Fixes
   - [X] Adjust colors
     - [X] make red, green, grays palette
   - [X] App should fit in the viewport
-  - [ ] Add interval begin flash
-  - [ ] Fade when inactive
   - [X] Interval and Pomodoro should have an indicator for what interval they're on
   - [X] Add reset buttons
-  - [ ] State should not be mutated outside mutation handlers (strict: true)
-    - Potential drawback is that components are destroyed
-  - [ ] Add disabled states to button
+  - [X] Add disabled states to button
   - [X] Make color palette and fix colors
-  - [ ] fix hours
-    - [ ] Timer
-    - [ ] Pomodoro (lol)
-    - [ ] Interval
-  - [ ] Fix settings
-  - [ ] only allow numerical input (and colons)?
-  - [ ] Input Validation
-    - [ ] Timer
-    - [ ] Alarm
-    - [ ] Pomodoro Settings
-    - [ ] Interval
-  - [ ] Add hover states for buttons
-  - [ ] Add dot on section buttons
+  - [X] only allow numerical input (and colons)?
+  - [x] Input Validation
+    - [X] Timer
+    - [X] Alarm
+    - [X] Interval
+  - [X] fix hours
+    - [X] Timer
+    <!-- - [ ] Pomodoro (lol) -->
+    - [X] Interval
+  - [ ] Auto add colons
+  - [ ] Add interval begin flash
+  - [ ] Fade when inactive
+  - [ ] Settings
+    - [ ] Make in Figma
+    - [ ]
+  - [ ] Pomodoro Input Validation Settings
   - [ ] Clean up code
+    - [ ] State should not be mutated outside mutation handlers (strict: true)
+      - Potential drawback is that components are destroyed
   - [ ] Why is timer initially slow?

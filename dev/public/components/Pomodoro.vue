@@ -24,6 +24,11 @@
       div.colon :
       div.number 0
       div.number 0
+    #clock(v-if="pomodoro.state === 'done'" :class="{'alert': alert}").time-style
+      div.number 0
+      div.colon :
+      div.number 0
+      div.number 0
     .indicator(v-if="pomodoro.state === 'running' || pomodoro.state === 'paused'")
       div
         img(v-if="isBreak" src="../images/Icon/PomodoroGreen.svg" alt="Pomodoro Icon")
@@ -65,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['pomodoro']),
+    ...mapState(['pomodoro', 'alert']),
     percent () {
       if (this.pomodoro.startTimestamp == null || this.pomodoro.state === 'waiting' || this.changed) {
         return 1
@@ -73,7 +78,7 @@ export default {
         return 0
       } else {
         let begin, end
-        if (this.pomodoro.currentInterval == 0) {
+        if (this.pomodoro.currentInterval === 0) {
           begin = this.pomodoro.startTimestamp
         } else {
           begin = this.pomodoro.intervalTimestamps[this.pomodoro.currentInterval - 1].timestamp

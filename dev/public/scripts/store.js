@@ -26,7 +26,8 @@ export default new Vuex.Store({
     alertAudio: {},
     alertInterval: null,
     settings: {
-      showSeconds: true
+      showSeconds: true,
+      clockType: 12
     }
   },
   mutations: {

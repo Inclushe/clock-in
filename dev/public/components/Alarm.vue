@@ -33,7 +33,7 @@
     .alarm-section(v-if="alarm.state === 'waiting'")
       .alarm-section_header
         h2 ADD ALARM
-    .input.input--alarm(v-if="alarm.state === 'waiting'")
+    .input.input--alarm(v-if="alarm.state === 'waiting'" :class="{'invalid': !validInput}")
       input#input(v-model="input")
     .meridiem-radio-section(v-if="alarm.state === 'waiting'")
       label.label.label--am(for="am")
@@ -42,7 +42,7 @@
       label.label.label--pm(for="pm")
         input.meridiem-radio#pm(v-model="meridiem" type="radio" name="meridiem" value="PM")
         span PM
-    #fab(@click="addAlarm" v-if="alarm.state === 'waiting'")
+    #fab(@click="addAlarm" v-if="alarm.state === 'waiting'" :class="{'disabled': !validInput}")
       img(src="../images/Icon/Add.svg" alt="Add Icon")
     #fab(@click="stopAlarm" v-if="alarm.state === 'done'")
       img(src="../images/Icon/Stop.svg" alt="Stop Icon")
@@ -59,20 +59,42 @@ export default {
       meridiem: 'PM'
     }
   },
-  computed: {
-    ...mapState(['currentTime', 'alarm', 'alert'])
-  },
   methods: {
     addAlarm () {
-      this.$store.dispatch('alarm/addAlarm', {
-        relativeTime: this.input,
-        relativeMeridiem: this.meridiem,
-        enabled: true
-      })
-      this.input = ''
+      if (this.validInput) {
+        this.$store.dispatch('alarm/addAlarm', {
+          relativeTime: this.input,
+          relativeMeridiem: this.meridiem,
+          enabled: true
+        })
+        this.input = ''
+      }
     },
     ...mapActions({ stopAlarm: 'alarm/stopAlarm' }),
     ...mapMutations({removeAlarm: 'alarm/removeAlarm'})
+  },
+  computed: {
+    ...mapState(['currentTime', 'alarm', 'alert', 'settings']),
+    validInput () {
+      console.log('t')
+      let validInput = true
+      let timerArray = this.input.split(':').slice(0, 2)
+      timerArray.forEach((value) => {
+        if (isNaN(Number(value))) {
+          validInput = false
+        }
+      })
+      if ((timerArray[0] > 23 && this.$store.state.settings.clockType === 24) ||
+          (timerArray[0] > 12 && this.$store.state.settings.clockType === 12) ||
+          (timerArray[0] < 1 && this.$store.state.settings.clockType === 12)) {
+        validInput = false
+      }
+      console.log(this.$store.state.settings.clockType)
+      if (timerArray[1] < 0 || timerArray[1] > 59) {
+        validInput = false
+      }
+      return validInput
+    }
   }
 }
 </script>

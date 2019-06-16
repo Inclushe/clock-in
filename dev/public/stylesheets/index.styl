@@ -136,6 +136,7 @@ body
 .input
   background-color: gray100
   border-radius: 1em
+  box-sizing: border-box
   &--timer
     grid-row: 4 / -1
     grid-column: 4 / 22
@@ -150,6 +151,7 @@ body
       font-size: 10em
       text-align: center
   input#input
+    box-sizing: border-box
     background: transparent
     color: gray900
     height: 100%
@@ -157,6 +159,20 @@ body
     font-family: 'Graduate', sans-serif
     font-variation-settings: "XOPQ" 150, "XTRA" 100, "OPSZ" 16, "GRAD" 20, "YTRA" 850, "CNTR" 100, "YOPQ" 100, "SERF" 0, "YTAS" 0, "YTLC" 650, "YTDE" 0, "SELE" 0
     border: none
+  &.invalid
+    border: 1em solid mainColor
+
+#clock
+  grid-row: 2 / 10
+  grid-column: 3 / 23
+  div
+    font-size: 32em
+    line-height: 1.17em
+  &.show-hours
+    grid-row: 4 / 10
+    div
+      font-size: 21em
+      line-height: 1.17em
 
 .indicator
   grid-row: 2 / 4
@@ -198,7 +214,7 @@ body
   bottom: 0
   right: 0
   width: 50%
-  background: #445857
+  background: gray900
   color: white
 
 for scale in (1..16)

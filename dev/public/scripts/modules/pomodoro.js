@@ -13,7 +13,7 @@ export default {
       sessionIntervals: 1,
       autoStart: true,
       pausing: true,
-      workForever: true
+      workForever: false
     },
     currentInterval: 0,
     intervalTimestamps: [],
@@ -38,24 +38,24 @@ export default {
       context.state.startTimestamp = calculatedTime
       for (let session = 0; session < context.state.config.sessionIntervals; session++) {
         for (let shortBreak = 0; shortBreak < (context.state.config.workIntervalsUntilLongBreak - 1); shortBreak++) {
-          calculatedTime = calculatedTime.add(context.state.config.workLength, 'minutes')
+          calculatedTime = calculatedTime.add(context.state.config.workLength, 'minute')
           context.state.intervalTimestamps.push({
             type: 'work',
             timestamp: calculatedTime
           })
-          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'minutes')
+          calculatedTime = calculatedTime.add(context.state.config.shortBreakLength, 'minute')
           context.state.intervalTimestamps.push({
             type: 'short break',
             timestamp: calculatedTime
           })
         }
         // Calculate last work block and add long break
-        calculatedTime = calculatedTime.add(context.state.config.workLength, 'minutes')
+        calculatedTime = calculatedTime.add(context.state.config.workLength, 'minute')
         context.state.intervalTimestamps.push({
           type: 'work',
           timestamp: calculatedTime
         })
-        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'minutes')
+        calculatedTime = calculatedTime.add(context.state.config.longBreakLength, 'minute')
         context.state.intervalTimestamps.push({
           type: 'long break',
           timestamp: calculatedTime
@@ -69,8 +69,8 @@ export default {
       let currentTime = dayjs()
       let difference = currentTime.valueOf() - context.state.pausedTimestamp.valueOf()
       console.log(difference)
+      context.state.startTimestamp = dayjs(context.state.startTimestamp.utc().valueOf() + difference).utc()
       for (let i = 0; i < context.state.intervalTimestamps.length; i++) {
-        console.log('before')
         context.state.intervalTimestamps[i].timestamp = dayjs(context.state.intervalTimestamps[i].timestamp.utc().valueOf() + difference).utc()
       }
       console.log(JSON.stringify(context.state.intervalTimestamps, null, 4))
@@ -97,7 +97,7 @@ export default {
               clearInterval(context.state.pomodoroInterval)
               context.state.state = 'done'
               context.commit('enableAlert', null, { root: true })
-              router.push('interval')
+              router.push('pomodoro')
             }
           } else {
             context.state.currentInterval++

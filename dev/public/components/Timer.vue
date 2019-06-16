@@ -8,9 +8,14 @@
       div
         img(src="../images/Icon/Timer.svg" alt="Timer Icon")
         h1 Timer
-    #clock(v-if="timer.state === 'running' || timer.state === 'paused'").time-style
+    #clock(v-if="timer.state === 'running' || timer.state === 'paused'", :class="{'show-hours': timer.hours !== '00'}").time-style
       transition(name="tick")
-        div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
+        div.number(v-if="timer.hours[0] !== '0'" :key="timer.hours[0]") {{ timer.hours[0] }}
+      transition(name="tick")
+        div.number(v-if="timer.hours !== '00'" :key="timer.hours[1]") {{ timer.hours[1] }}
+      div.colon(v-if="timer.hours !== '00'") :
+      transition(name="tick")
+        div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0' || timer.hours !== '00'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
       transition(name="tick")
         div.number(:key="timer.differenceTimestamp.format('mm')[1]") {{ timer.differenceTimestamp.format('mm')[1] }}
       div.colon :
@@ -23,12 +28,12 @@
       div.colon :
       div.number 0
       div.number 0
-    .input.input--timer(v-if="timer.state === 'waiting'" @keydown.enter="startTimer")
-      input#input(type="text" v-model="timerInput")
+    .input.input--timer(v-if="timer.state === 'waiting'" @keydown.enter="startTimer" :class="{'invalid': !validInput}")
+      input#input(type="text" inputmode="numeric" v-model="timerInput")
     .time-button-section.time-button-section--short
       .time-button(@click="resetTimer" v-if="timer.state !== 'waiting'")
         span Reset
-    #fab(@click="startTimer" v-if="timer.state === 'waiting'")
+    #fab(@click="startTimer" v-if="timer.state === 'waiting'" :class="{'disabled': !validInput}")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
     #fab(@click="unpauseTimer" v-else-if="timer.state === 'paused'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
@@ -64,11 +69,21 @@ export default {
         // console.log('perend')
         return ((this.timer.differenceTimestamp.valueOf() - 1100) / (this.timer.endTimestamp.valueOf() - this.timer.startTimestamp.valueOf()))
       }
+    },
+    validInput () {
+      let validInput = true
+      let timerArray = this.timerInput.split(':').reverse().slice(0, 3)
+      timerArray.forEach((value) => {
+        if (isNaN(Number(value))) {
+          validInput = false
+        }
+      })
+      return validInput
     }
   },
   methods: {
     startTimer () {
-      if (this.timer.state == 'waiting') {
+      if (this.timer.state === 'waiting' && this.validInput) {
         // Add one second to the current time so that the timer starts at the input
         let calculatedTime = dayjs().utc().add(1, 's')
         this.timer.startTimestamp = calculatedTime
@@ -83,8 +98,11 @@ export default {
         this.$store.commit('playSound', 'timer_start', { root: true })
       }
     },
-    ...mapMutations({pauseTimer: 'timer/pauseTimer'}),
-    ...mapActions({resetTimer: 'timer/resetTimer', unpauseTimer: 'timer/unpauseTimer'})
+    ...mapMutations({ pauseTimer: 'timer/pauseTimer' }),
+    ...mapActions({ 
+      resetTimer: 'timer/resetTimer',
+      unpauseTimer: 'timer/unpauseTimer'
+    })
   },
   mounted () {
     console.log('timer')

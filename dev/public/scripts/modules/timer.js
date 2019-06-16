@@ -9,7 +9,8 @@ export default {
     startTimestamp: null,
     endTimestamp: null,
     differenceTimestamp: null,
-    pausedTimestamp: null
+    pausedTimestamp: null,
+    hours: ''
   },
   mutations: {
     pauseTimer (state) {
@@ -37,6 +38,8 @@ export default {
         context.commit('enableAlert', null, { root: true })
         router.push('timer')
       } else {
+        let hours = (((differenceTimestamp.date() - 1) * 24) + differenceTimestamp.hour()).toString()
+        context.state.hours = hours.length === 1 ? (0 + hours) : hours
         context.state.differenceTimestamp = differenceTimestamp
         context.state.state = 'running'
       }
