@@ -23,13 +23,18 @@ new Vue({
   store,
   router,
   // computed: mapState(['currentTime']),
-  computed: mapState(['settingsToggle', 'alert']),
+  data: {
+    fadeTimeout: null,
+    fade: false
+  },
+  computed: mapState(['settingsToggle', 'alert', 'settings']),
   mounted () {
     let self = this
     setInterval(function () {
       self.$store.commit('updateCurrentTime')
     }, 100)
     this.$store.commit('loadAlertSound')
+    this.fadeDebounce()
   },
   methods: {
     toggleFullscreen () {
@@ -37,6 +42,18 @@ new Vue({
         fscreen.exitFullscreen(this.$el)
       } else {
         fscreen.requestFullscreen(this.$el)
+      }
+    },
+    fadeDebounce () {
+      clearTimeout(this.fadeTimeout)
+      if (this.fade === true) {
+        this.fade = false
+      }
+      if (this.$store.state.settings.fadeWhileInactive) {
+        let self = this
+        this.fadeTimeout = setTimeout(function () {
+          self.fade = true
+        }, this.$store.state.settings.secondsToFade * 1000)
       }
     },
     ...mapMutations(['toggleSettings'])

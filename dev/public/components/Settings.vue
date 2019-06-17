@@ -14,9 +14,17 @@
     label.settings-toggle(for="autoAdd")
       input(type="checkbox" id="autoAdd" v-model="settings.autoAddColons")
       span Automatically Insert Colons
-    //- label.settings-toggle(for="fade")
-    //-   input(type="checkbox" id="fade" v-model="settings.fadeWhileInactive")
-    //-   span Fade while Inactive
+    label.settings-toggle(for="fade")
+      input(type="checkbox" id="fade" v-model="settings.fadeWhileInactive")
+      span Fade while Inactive
+    label(for="fadeAmount" v-if="settings.fadeWhileInactive")
+      span Fade Amount
+      br
+      input(type="number" id="workLength" v-model="settings.fadeAmount" :disabled="!settings.fadeWhileInactive" min="0" max="1" step="0.1")
+    label(for="secondsToFade" v-if="settings.fadeWhileInactive")
+      span Seconds to Fade
+      br
+      input(type="number" id="workLength" v-model="settings.secondsToFade" :disabled="!settings.fadeWhileInactive" min="1" step="10")
     h2 Clock
     label.settings-toggle(for="showSeconds")
       input(type="checkbox" id="showSeconds" v-model="settings.showSeconds")

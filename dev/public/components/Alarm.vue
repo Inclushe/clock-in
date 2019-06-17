@@ -27,7 +27,7 @@
               input(type="checkbox" :id="alarm.id" v-model="alarm.enabled")
               span
             span.time-style {{ alarm.relativeTime }}
-            span.meridiem {{ alarm.relativeMeridiem }}
+            span.meridiem(v-if="alarm.relativeMeridiem !== 'none'") {{ alarm.relativeMeridiem }}
             a(@click="removeAlarm(alarm.id)")
               img.icon.icon--delete(src="../images/Icon/twotone-delete-24px.svg" alt="Delete Icon")
     .alarm-section(v-if="alarm.state === 'waiting'")
@@ -35,7 +35,7 @@
         h2 ADD ALARM
     .input.input--alarm(v-if="alarm.state === 'waiting'" :class="{'invalid': !validInput}")
       input#input(v-model="input")
-    .meridiem-radio-section(v-if="alarm.state === 'waiting'")
+    .meridiem-radio-section(v-if="alarm.state === 'waiting' && settings.clockType === 12")
       label.label.label--am(for="am")
         input.meridiem-radio#am(v-model="meridiem" type="radio" name="meridiem" value="AM" checked)
         span AM
@@ -64,7 +64,7 @@ export default {
       if (this.validInput) {
         this.$store.dispatch('alarm/addAlarm', {
           relativeTime: this.input,
-          relativeMeridiem: this.meridiem,
+          relativeMeridiem: this.$store.state.settings.clockType === 12 ? this.meridiem : 'none',
           enabled: true
         })
         this.input = ''

@@ -11,14 +11,14 @@ html(lang="en")
     link(rel="shortcut icon", href="favicon.ico", type="image/x-icon")
     title Clock In
   body
-    #app(:class="{'alert': alert}")
+    #app(:class="{'alert': alert}" @mousemove="fadeDebounce" :style="{opacity: fade && settings.fadeWhileInactive && !alert ? 1 - settings.fadeAmount : 1 }")
       audio#alert(v-if="alert")
         source(src="/public/audio/alert_simple.ogg" type="audio/ogg")
         source(src="/public/audio/alert_simple.mp3" type="audio/mpeg")
       .container(:class='{"settings-active": settingsToggle}')
         transition(name="section" mode="out-in")
           router-view
-        #button-row
+        #button-row(v-show="!fade")
           .section-group
             router-link(to='/').button
               img.icon(src='/public/images/Icon/Clock.svg' alt='Clock Icon')
