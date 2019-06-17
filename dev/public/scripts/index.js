@@ -38,6 +38,7 @@ new Vue({
     // autosave with timer and stopwatch is buggy
     this.$store.state.timer.state = 'waiting'
     this.$store.state.stopwatch.state = 'waiting'
+    this.$store.state.settingsToggle = false
   },
   methods: {
     toggleFullscreen () {
