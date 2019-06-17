@@ -9,22 +9,22 @@
         img(src="../images/Icon/Timer.svg" alt="Timer Icon")
         h1 Timer
       div
-        h2 Colons are automatically inserted.<br>Change this behavior in Settings.
-    #clock(v-if="timer.state === 'running' || timer.state === 'paused'", :class="{'show-hours': timer.hours !== '00'}").time-style
+        h2 Colons {{ settings.autoAddColons ? 'are automatically' : 'must be manually' }}  inserted.<br>Change this behavior in Settings.
+    #clock(v-if="timer.differenceTimestamp !== null && (timer.state === 'running' || timer.state === 'paused')", :class="{'show-hours': timer.hours !== '00'}").time-style
       transition(name="tick")
         div.number(v-if="timer.hours[0] !== '0'" :key="timer.hours[0]") {{ timer.hours[0] }}
       transition(name="tick")
         div.number(v-if="timer.hours !== '00'" :key="timer.hours[1]") {{ timer.hours[1] }}
       div.colon(v-if="timer.hours !== '00'") :
       transition(name="tick")
-        div.number(v-if="timer.differenceTimestamp.format('mm')[0] !== '0' || timer.hours !== '00'" :key="timer.differenceTimestamp.format('mm')[0]") {{ timer.differenceTimestamp.format('mm')[0] }}
+        div.number(v-if="differenceTimestamp.format('mm')[0] !== '0' || timer.hours !== '00'" :key="differenceTimestamp.format('mm')[0]") {{ differenceTimestamp.format('mm')[0] }}
       transition(name="tick")
-        div.number(:key="timer.differenceTimestamp.format('mm')[1]") {{ timer.differenceTimestamp.format('mm')[1] }}
+        div.number(:key="differenceTimestamp.format('mm')[1]") {{ differenceTimestamp.format('mm')[1] }}
       div.colon :
       transition(name="tick")
-        div.number(:key="timer.differenceTimestamp.format('ss')[0]") {{ timer.differenceTimestamp.format('ss')[0] }}
+        div.number(:key="differenceTimestamp.format('ss')[0]") {{ differenceTimestamp.format('ss')[0] }}
       transition(name="tick")
-        div.number(:key="timer.differenceTimestamp.format('ss')[1]") {{ timer.differenceTimestamp.format('ss')[1] }}
+        div.number(:key="differenceTimestamp.format('ss')[1]") {{ differenceTimestamp.format('ss')[1] }}
     #clock(v-if="timer.state === 'done'" :class="{'alert': alert}").time-style
       div.number 0
       div.colon :
@@ -60,8 +60,17 @@ export default {
   },
   computed: {
     ...mapState(['settings', 'timer', 'alert']),
+    differenceTimestamp () {
+      try {
+        this.timer.differenceTimestamp.format('hh')
+        return this.timer.differenceTimestamp
+      } catch (e) {
+        
+        return dayjs(this.timer.differenceTimestamp)
+      }
+    },
     percent () {
-      if (this.timer.startTimestamp == null || this.timer.endTimestamp == null || this.timer.state === 'waiting') {
+      if (this.timer.startTimestamp == null || this.timer.endTimestamp == null || this.timer.differenceTimestamp == null || this.timer.state === 'waiting') {
         return 1
       } else if (this.timer.state === 'done') {
         return 0
@@ -128,6 +137,7 @@ export default {
   },
   mounted () {
     console.log('timer')
+    console.log(dayjs(this.timer.differenceTimestamp).format('hh'))
     if (this.timer.state === 'waiting') {
       this.$el.querySelector('input#input').focus()
     }

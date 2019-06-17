@@ -24,7 +24,7 @@
     label(for="secondsToFade" v-if="settings.fadeWhileInactive")
       span Seconds to Fade
       br
-      input(type="number" id="workLength" v-model="settings.secondsToFade" :disabled="!settings.fadeWhileInactive" min="1" step="10")
+      input(type="number" id="workLength" v-model="settings.secondsToFade" :disabled="!settings.fadeWhileInactive" min="1")
     h2 Clock
     label.settings-toggle(for="showSeconds")
       input(type="checkbox" id="showSeconds" v-model="settings.showSeconds")
@@ -62,7 +62,13 @@
     p.about.
       Created by <a href="https://inclushe.com" target="_blank">Inclushe</a>
       <br>
-      Built using Vue, Vuex, and Vue Router
+      Built using <a href="https://vuejs.org/" target="_blank">Vue</a>, Vuex, and Vue Router
+      <br>
+      Icons and sounds from <a href="https://material.io/" target="_blank">Material</a>
+      <br>
+      <i>Graduate</i> variable font by <a href="https://tipo.net.ar/" target="_blank">Eduardo Tunni</a>
+      <br>
+      <i>Inter UI</i> font by <a href="https://rsms.me/" target="_blank">Rasmus Andersson</a>
       <br>
       Source on <a href="https://gitlab.com/Inclushe/clock-in" target="_blank">Gitlab</a>
     p.about.

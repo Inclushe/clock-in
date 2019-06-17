@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist'
 import dayjs from 'dayjs'
 import timer from './modules/timer'
 import stopwatch from './modules/stopwatch'
@@ -10,7 +11,10 @@ import sounds from '../audio/*.ogg'
 
 Vue.use(Vuex)
 
+const vuexLocalStorage = new VuexPersist()
+
 export default new Vuex.Store({
+  plugins: [vuexLocalStorage.plugin],
   modules: {
     timer,
     stopwatch,

@@ -35,6 +35,9 @@ new Vue({
     }, 100)
     this.$store.commit('loadAlertSound')
     this.fadeDebounce()
+    // autosave with timer and stopwatch is buggy
+    this.$store.state.timer.state = 'waiting'
+    this.$store.state.stopwatch.state = 'waiting'
   },
   methods: {
     toggleFullscreen () {
@@ -60,4 +63,7 @@ new Vue({
   }
 })
 
-console.log('hello')
+window.addEventListener('beforeunload', (event) => {
+  event.preventDefault()
+  event.returnValue = ''
+})
