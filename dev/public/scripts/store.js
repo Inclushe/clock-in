@@ -27,7 +27,9 @@ export default new Vuex.Store({
     alertInterval: null,
     settings: {
       showSeconds: true,
-      clockType: 12
+      autoAddColons: true,
+      clockType: 12,
+      fadeWhileInactive: false
     }
   },
   mutations: {

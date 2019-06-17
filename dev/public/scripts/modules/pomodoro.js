@@ -11,7 +11,6 @@ export default {
       longBreakLength: 15,
       workIntervalsUntilLongBreak: 3,
       sessionIntervals: 1,
-      autoStart: true,
       pausing: true,
       workForever: false
     },

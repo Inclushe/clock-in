@@ -126,7 +126,28 @@ export default {
         self.changed = false
         console.log(self.changed)
       }, 100)
-    }
+    },
+    'interval.config.constant.intervalLength' () {
+      this.$store.state.interval.config.constant.intervalLength = this.$store.state.interval.config.constant.intervalLength.slice(0, 9)
+      if (this.$store.state.settings.autoAddColons) {
+        // auto-insert colons
+        let numberIndex = 0
+        let str = this.$store.state.interval.config.constant.intervalLength.split('').reverse().reduce((r, v) => {
+          if (isNaN(Number(v)) === false) {
+            if (numberIndex % 2 === 0 && numberIndex !== 0) {
+              r += ':'
+            }
+            r = r + v
+            numberIndex++
+          }
+          return r
+        }, '')
+        this.$store.state.interval.config.constant.intervalLength = str.split('').reverse().join('')
+      }
+    },
+    'interval.config.variable.intervals' () {
+
+    },
   },
   methods: {
     ...mapMutations({

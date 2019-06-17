@@ -1,0 +1,102 @@
+@import '_variables'
+
+.settings
+  position: absolute
+  top: 4em
+  padding: 2em
+  display: flex
+  flex-direction: column
+  max-width: 30em
+  background: gray900
+  color: gray100
+  border-radius: 1em
+  .settings-header
+    display: flex
+    justify-content: space-between
+    h1
+      text-transform: uppercase
+      font-weight: bold
+      letter-spacing: 0.05em
+      font-size: 2em
+      svg
+        height: 2em
+        width: 2em
+        vertical-align: middle
+      span
+        vertical-align: middle
+    a
+      margin-top: 1em
+      cursor: pointer
+      svg
+        height: 2em
+        width: 2em
+        vertical-align: middle
+      span
+        vertical-align: middle
+        text-transform: uppercase
+        // font-weight: bold
+        font-size: 2em
+  h2
+    text-transform: uppercase
+    text-decoration: underline
+    font-size: 1em
+    margin-top: 1em
+  label
+    margin-top: 0.5em
+    span
+      line-height: 2em
+      vertical-align: middle
+      font-size: 1em
+  input[type="number"]
+    width: 3em
+    margin-right: 1em
+  p.about
+    margin-top: 3em
+    color: gray500
+    line-height: 1.5
+    a
+      color: green500
+  .inclushe-logo
+    padding: 3em
+    text-align: center
+    svg
+      height: 8em
+      width: 8em
+label.settings-toggle
+  position: relative
+  input
+    position: absolute
+    top: 0
+    clip-path: polygon(0 0)
+  span
+    padding-left: 4em
+    cursor: pointer
+    &::before
+      box-sizing: border-box
+      content: ''
+      display: block
+      position: absolute
+      top: 0.5em
+      left: 0
+      height: 1em
+      width: 3em
+      border: 0.125em solid gray100
+      border-radius: 2em
+      transition: background-color 500ms sharpEase
+    &::after
+      box-sizing: border-box
+      content: ''
+      display: block
+      position: absolute
+      top: 0.75em
+      left: 0.25em
+      height: 0.5em
+      width: 0.5em
+      border-radius: 1em
+      background: gray100
+      transition: background-color 500ms sharpEase, left 500ms sharpEase
+  & > input:checked + span::before
+    background: gray100
+  & > input:checked + span::after
+    background: gray900
+    left: 2.25em

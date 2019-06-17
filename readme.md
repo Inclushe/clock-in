@@ -18,13 +18,13 @@ npm run watch
 
 ## Todo
 
-- [ ] General Layout
+- [X] General Layout
   - [X] Recreate Figma Design (with seconds and main buttons)
   - [X] Create Timer Progress Bar
   - [X] Create Entrance/Exit Animation
   - [X] Set up Vue Router
-  - [ ] Scale layout to width
-- [ ] Clock
+  - [X] Scale layout to width
+- [X] Clock
   - [X] Make the clock functional
   - [X] Add Tick Animation
 - [ ] Timer
@@ -35,11 +35,6 @@ npm run watch
   - [X] Create resetTimer function
   - [X] Add reset button (same style as stopwatch)
   - [X] Fix progress bar (stop when pausing)
-  - [ ] Fix input box (Android Clock App)
-    - [ ] Auto-add colons
-    - [ ] Valid input
-    - [ ] Handle invalid input
-  - [ ] Fix hour display
   - [ ] Add notice for autoplaying disabled or find out how to "bypass" (intent)
   - [X] Add animation
   - [X] Change progress indicator pattern to svg
@@ -56,24 +51,23 @@ npm run watch
   - [X] Add sounds (in material)
   - [X] Breaks should be green
   - [ ] Autopause should work
-  - [ ] Add Settings
-    - [ ] Work Break Length
-    - [ ] Short Break Length
-    - [ ] Long Break Length
-    - [ ] Interval until long break
-    - [ ] Session intervals
+  - [X] Add Settings
+    - [X] Work Break Length
+    - [X] Short Break Length
+    - [X] Long Break Length
+    - [X] Interval until long break
+    - [X] Session intervals
     - [ ] Start automatically
-    - [ ] Disable pausing
+    - [X] Disable pausing
 - [ ] Interval
   - [X] Constant
   - [X] Variable
-  - [ ] Add layout
+  - [X] Add layout
     - [X] Constant
     - [X] Variable
   - [X] Interval progress and indicator
 - [ ] Settings
   - [X] Create Sliding Pane
-  - [ ] Properly shrink viewport
   - [ ] Add 24 hour option ****
 - [ ] Gripes & Fixes
   - [X] Adjust colors
@@ -92,13 +86,12 @@ npm run watch
     - [X] Timer
     <!-- - [ ] Pomodoro (lol) -->
     - [X] Interval
-  - [ ] Auto add colons
+  - [X] Auto add colons, doesn't work properly
   - [ ] Add interval begin flash
   - [ ] Fade when inactive
-  - [ ] Settings
-    - [ ] Make in Figma
-    - [ ]
-  - [ ] Pomodoro Input Validation Settings
+  - [X] Settings
+    - [X] Make in Figma
+  - [X] Pomodoro Input Validation Settings
   - [ ] Clean up code
     - [ ] State should not be mutated outside mutation handlers (strict: true)
       - Potential drawback is that components are destroyed

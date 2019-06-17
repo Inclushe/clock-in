@@ -8,6 +8,8 @@
       div
         img(src="../images/Icon/Timer.svg" alt="Timer Icon")
         h1 Timer
+      div
+        h2 Colons are automatically inserted.<br>Change this behavior in Settings.
     #clock(v-if="timer.state === 'running' || timer.state === 'paused'", :class="{'show-hours': timer.hours !== '00'}").time-style
       transition(name="tick")
         div.number(v-if="timer.hours[0] !== '0'" :key="timer.hours[0]") {{ timer.hours[0] }}
@@ -103,6 +105,26 @@ export default {
       resetTimer: 'timer/resetTimer',
       unpauseTimer: 'timer/unpauseTimer'
     })
+  },
+  watch: {
+    timerInput () {
+      this.timerInput = this.timerInput.slice(0, 9)
+      if (this.$store.state.settings.autoAddColons) {
+        // auto-insert colons
+        let numberIndex = 0
+        let str = this.timerInput.split('').reverse().reduce((r, v) => {
+          if (isNaN(Number(v)) === false) {
+            if (numberIndex % 2 === 0 && numberIndex !== 0) {
+              r += ':'
+            }
+            r = r + v
+            numberIndex++
+          }
+          return r
+        }, '')
+        this.timerInput = str.split('').reverse().join('')
+      }
+    }
   },
   mounted () {
     console.log('timer')

@@ -95,6 +95,26 @@ export default {
       }
       return validInput
     }
+  },
+  watch: {
+    input () {
+      this.input = this.input.slice(0, 5)
+      if (this.$store.state.settings.autoAddColons) {
+        // auto-insert colons
+        let numberIndex = 0
+        let str = this.input.split('').reverse().reduce((r, v) => {
+          if (isNaN(Number(v)) === false) {
+            if (numberIndex % 2 === 0 && numberIndex !== 0) {
+              r += ':'
+            }
+            r = r + v
+            numberIndex++
+          }
+          return r
+        }, '')
+        this.input = str.split('').reverse().join('')
+      }
+    }
   }
 }
 </script>

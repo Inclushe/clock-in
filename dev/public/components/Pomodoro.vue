@@ -53,11 +53,11 @@
         span Reset
     #fab(@click="startPomodoro" v-if="pomodoro.state === 'waiting'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
-    #fab(@click="unpausePomodoro" v-else-if="pomodoro.state === 'paused'")
+    #fab(@click="unpausePomodoro" v-if="pomodoro.state === 'paused'")
       img(src="../images/Icon/Play.svg" alt="Play Icon")
-    #fab(@click="pausePomodoro" v-else-if="pomodoro.state === 'running'")
+    #fab(@click="pausePomodoro" v-if="pomodoro.state === 'running' && pomodoro.config.pausing")
       img(src="../images/Icon/Pause.svg" alt="Pause Icon")
-    #fab(@click="resetPomodoro" v-else-if="pomodoro.state === 'done'")
+    #fab(@click="resetPomodoro" v-if="pomodoro.state === 'done'")
       img(src="../images/Icon/Stop.svg" alt="Stop Icon")
 </template>
 
